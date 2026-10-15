@@ -19,7 +19,6 @@
     --texto-2: #b7ac99;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
   body {
     font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
     background: var(--rock);
@@ -31,7 +30,7 @@
       radial-gradient(ellipse 70% 40% at 10% 90%, rgba(192,57,43,.06), transparent 60%);
     background-attachment: fixed;
   }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 
   /* ---------- Cabeçalho ---------- */
   header {
@@ -69,44 +68,6 @@
     font-style: italic;
     letter-spacing: .01em;
   }
-  .selo-joao {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 20px;
-    padding: 8px 18px;
-    border-radius: 999px;
-    font-size: .85rem;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--creme);
-    background: linear-gradient(90deg, rgba(224,163,37,.22), rgba(192,57,43,.22));
-    border: 1px solid rgba(224,163,37,.55);
-    box-shadow: 0 0 18px rgba(224,163,37,.12) inset;
-  }
-  .selo-joao .estrela { color: var(--dourado); }
-
-  .redes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 26px;
-  }
-  .redes a {
-    display: inline-block;
-    padding: 9px 16px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: .9rem;
-    font-weight: 600;
-    color: var(--texto);
-    background: var(--rock-3);
-    border: 1px solid var(--edge);
-    transition: transform .12s ease, border-color .12s ease;
-  }
-  .redes a:hover { transform: translateY(-2px); border-color: var(--dourado); }
 
   /* ---------- Seções ---------- */
   h2.secao {
@@ -114,78 +75,88 @@
     font-size: 1.5rem;
     text-transform: uppercase;
     letter-spacing: .06em;
-    margin: 40px 0 18px;
+    margin: 40px 0 6px;
     display: flex;
     align-items: center;
     gap: 14px;
   }
   h2.secao::after { content: ""; flex: 1; height: 1px; background: var(--edge); }
+  .contagem {
+    color: var(--texto-2);
+    font-size: .82rem;
+    margin-bottom: 18px;
+    letter-spacing: .04em;
+  }
 
-  /* ---------- Cards de show ---------- */
-  .show {
+  /* ---------- Tabela de shows (desktop) ---------- */
+  .tabela-wrap {
     background: var(--rock-2);
     border: 1px solid var(--edge);
-    border-left: 4px solid var(--verde);
     border-radius: 12px;
-    padding: 20px 22px;
-    margin-bottom: 18px;
+    overflow: hidden;
     box-shadow: 0 4px 18px rgba(0,0,0,.35);
   }
-  .show.status-a_confirmar { border-left-color: var(--dourado); }
-  .show.status-cancelado { border-left-color: var(--vermelho); opacity: .72; }
-  .show-topo {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 12px;
+  table.agenda {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .92rem;
   }
-  .show-data {
-    font-family: Georgia, serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--creme);
-  }
-  .show-data .hora { color: var(--dourado); font-size: 1rem; margin-left: 8px; }
-  .selo {
-    display: inline-block;
-    padding: 4px 14px;
-    border-radius: 999px;
-    font-size: .72rem;
+  table.agenda th {
+    background: var(--rock-3);
+    color: var(--dourado);
+    font-size: .74rem;
     font-weight: 800;
     letter-spacing: .1em;
     text-transform: uppercase;
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--edge);
+    white-space: nowrap;
+  }
+  table.agenda td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(58,47,34,.6);
+    vertical-align: top;
+  }
+  table.agenda tr:last-child td { border-bottom: none; }
+  table.agenda tr.cabecalho-mes td {
+    background: rgba(224,163,37,.07);
+    color: var(--dourado);
+    font-family: Georgia, serif;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--edge);
+  }
+  td.data {
+    font-family: Georgia, serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var(--creme);
+    white-space: nowrap;
+  }
+  td.data .dow { display: block; font-size: .7rem; color: var(--texto-2); font-weight: 400; letter-spacing: .06em; text-transform: uppercase; margin-top: 2px; }
+  td.local { font-weight: 700; color: var(--texto); min-width: 120px; }
+  td .sub { display: block; color: var(--texto-2); font-size: .82rem; margin-top: 2px; font-weight: 400; }
+  td .nenhum { color: #6e6556; font-style: italic; }
+  td.pass b { color: var(--texto); font-weight: 600; }
+  td.obs { color: var(--texto-2); font-style: italic; font-size: .86rem; min-width: 150px; }
+  .selo {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
   .selo.confirmado { background: rgba(29,185,84,.15); color: var(--verde); border: 1px solid rgba(29,185,84,.5); }
   .selo.a_confirmar { background: rgba(224,163,37,.15); color: var(--dourado); border: 1px solid rgba(224,163,37,.5); }
   .selo.cancelado  { background: rgba(192,57,43,.15); color: #e8705f; border: 1px solid rgba(192,57,43,.5); }
-
-  .show-local {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--texto);
-  }
-  .show-linha { color: var(--texto-2); font-size: .92rem; margin-top: 2px; }
-  .show-grid {
-    margin-top: 14px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 8px 18px;
-    font-size: .9rem;
-  }
-  .campo { color: var(--texto-2); }
-  .campo b { color: var(--texto); font-weight: 600; }
-  .obs {
-    margin-top: 12px;
-    padding: 10px 14px;
-    background: rgba(255,255,255,.03);
-    border-left: 3px solid var(--dourado);
-    border-radius: 6px;
-    font-size: .9rem;
-    color: var(--texto-2);
-    font-style: italic;
-  }
+  tr.linha-cancelado td { opacity: .6; }
   .vazio {
     text-align: center;
     color: var(--texto-2);
@@ -243,9 +214,9 @@
     color: var(--dourado);
     border: 1px solid var(--edge);
     border-radius: 6px;
-    padding: 6px 14px;
+    padding: 8px 16px;
     cursor: pointer;
-    font-size: .82rem;
+    font-size: .84rem;
     font-weight: 600;
   }
   .modelo button:hover { border-color: var(--dourado); }
@@ -263,16 +234,90 @@
     font-style: italic;
     margin-bottom: 16px;
   }
-  footer .redes { margin-top: 0; }
+  footer .redes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  footer .redes a {
+    display: inline-block;
+    padding: 9px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: .9rem;
+    font-weight: 600;
+    color: var(--texto);
+    background: var(--rock-3);
+    border: 1px solid var(--edge);
+    transition: transform .12s ease, border-color .12s ease;
+  }
+  footer .redes a:hover { transform: translateY(-2px); border-color: var(--dourado); }
   footer .copy {
     margin-top: 20px;
     font-size: .78rem;
     color: #6e6556;
   }
 
-  @media (max-width: 520px) {
-    .show { padding: 16px; }
-    .show-topo { flex-direction: column; align-items: flex-start; }
+  /* ---------- Mobile: a tabela vira "ficha" por show ---------- */
+  @media (max-width: 700px) {
+    .wrap { padding: 0 14px; }
+    .tabela-wrap { background: transparent; border: none; box-shadow: none; border-radius: 0; }
+    table.agenda, table.agenda tbody, table.agenda tr, table.agenda td { display: block; width: 100%; }
+    table.agenda thead { display: none; }           /* sem cabeçalho no celular */
+    table.agenda tr {
+      background: var(--rock-2);
+      border: 1px solid var(--edge);
+      border-left: 4px solid var(--verde);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.35);
+    }
+    table.agenda tr.status-a_confirmar { border-left-color: var(--dourado); }
+    table.agenda tr.status-cancelado { border-left-color: var(--vermelho); }
+    table.agenda tr.linha-cancelado { opacity: .7; }
+    table.agenda tr.cabecalho-mes {
+      background: rgba(224,163,37,.10);
+      border: 1px solid rgba(224,163,37,.4);
+      border-left: 4px solid var(--dourado);
+      padding: 9px 16px;
+      margin: 26px 0 16px;
+      border-radius: 8px;
+    }
+    table.agenda td {
+      padding: 3px 0;
+      border: none;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      white-space: normal;
+    }
+    table.agenda td::before {
+      content: attr(data-rotulo);
+      flex: 0 0 108px;
+      color: var(--dourado);
+      font-size: .66rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding-top: 2px;
+    }
+    table.agenda td.data::before { content: none; }  /* data já é o título */
+    table.agenda td.data {
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(58,47,34,.6);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    table.agenda td.data .dow { display: inline; font-size: .72rem; margin-left: 8px; }
+    table.agenda td.local { font-size: 1.05rem; }
+    table.agenda td .sub { display: inline; margin: 0 0 0 6px; }
+    table.agenda td.obs { font-size: .88rem; }
+    table.agenda td.obs::before { padding-top: 0; }
   }
 </style>
 </head>
@@ -281,19 +326,11 @@
 <header>
   <div class="banda">Os Patto</div>
   <p class="tagline">Reggae, rock e groove da Serra da Canastra há 20 anos</p>
-  <div class="selo-joao"><span class="estrela">★</span> João Rock 2026 • Top 20 Nacional <span class="estrela">★</span></div>
-
-  <nav class="redes">
-    <a href="https://instagram.com/ospatto" target="_blank" rel="noopener">Instagram @ospatto</a>
-    <a href="https://youtube.com/ospatto" target="_blank" rel="noopener">YouTube</a>
-    <a href="https://facebook.com/ospattomusic" target="_blank" rel="noopener">Facebook</a>
-    <a href="https://tiktok.com/@ospatto" target="_blank" rel="noopener">TikTok</a>
-    <a href="https://open.spotify.com" target="_blank" rel="noopener">Spotify</a>
-  </nav>
 </header>
 
 <main class="wrap">
   <h2 class="secao">Próximos Shows</h2>
+  <p class="contagem" id="contagem"></p>
   <div id="agenda"><p class="vazio">Carregando agenda…</p></div>
 
   <div class="cta">
@@ -309,7 +346,7 @@
 <footer>
   <p class="serra">Da Serra da Canastra pro mundo — música independente, raiz e de família.</p>
   <nav class="redes">
-    <a href="https://instagram.com/ospatto" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://instagram.com/ospatto" target="_blank" rel="noopener">Instagram @ospatto</a>
     <a href="https://youtube.com/ospatto" target="_blank" rel="noopener">YouTube</a>
     <a href="https://facebook.com/ospattomusic" target="_blank" rel="noopener">Facebook</a>
     <a href="https://tiktok.com/@ospatto" target="_blank" rel="noopener">TikTok</a>
@@ -359,8 +396,27 @@
   }
   function dataBR(iso) {
     if (!iso) return "";
-    var p = iso.split("-");
+    var p = String(iso).split("-");
     return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : iso;
+  }
+  function dowBR(iso) {
+    var p = String(iso || "").split("-");
+    if (p.length !== 3) return "";
+    var dias = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+    var d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+    return isNaN(d) ? "" : dias[d.getUTCDay()];
+  }
+  function mesBR(iso) {
+    var p = String(iso || "").split("-");
+    if (p.length !== 3) return "Sem data";
+    var meses = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+    var m = +p[1] - 1;
+    return (m >= 0 && m < 12 ? meses[m] : "???") + " " + p[0];
+  }
+  function ouVazio(v, italico) {
+    return (v === null || v === undefined || String(v).trim() === "")
+      ? '<span class="nenhum">' + (italico ? "não informado" : "—") + '</span>'
+      : esc(v);
   }
   var NOME_STATUS = {
     "confirmado": "Confirmado",
@@ -382,29 +438,45 @@
       shows.sort(function (a, b) {
         return String(a.data || "").localeCompare(String(b.data || ""));
       });
-      box.innerHTML = shows.map(function (s) {
+
+      document.getElementById("contagem").textContent =
+        shows.length + (shows.length === 1 ? " show na estrada" : " shows na estrada") + " · ordenados por data";
+
+      var html = '<div class="tabela-wrap"><table class="agenda"><thead><tr>' +
+        "<th>Data</th><th>Horário</th><th>Local</th><th>Endereço</th><th>Cidade</th>" +
+        "<th>Passagem</th><th>Contato</th><th>Status</th><th>Observações</th>" +
+        "</tr></thead><tbody>";
+
+      var mesAtual = null;
+      shows.forEach(function (s) {
+        var mes = mesBR(s.data);
+        if (mes !== mesAtual) {
+          html += '<tr class="cabecalho-mes"><td colspan="9">' + esc(mes) + "</td></tr>";
+          mesAtual = mes;
+        }
         var st = NOME_STATUS[s.status] || s.status || "A confirmar";
-        var classe = "show status-" + (s.status || "a_confirmar");
-        return (
-          '<article class="' + classe + '">' +
-            '<div class="show-topo">' +
-              '<div class="show-data">' + esc(dataBR(s.data)) +
-                (s.horario ? '<span class="hora">🕐 ' + esc(s.horario) + '</span>' : '') +
-              '</div>' +
-              '<span class="selo ' + esc(s.status || "a_confirmar") + '">' + esc(st) + '</span>' +
-            '</div>' +
-            '<div class="show-local">📍 ' + esc(s.local) + '</div>' +
-            '<div class="show-linha">' + esc(s.endereco) + ' — ' + esc(s.cidade) + '</div>' +
-            '<div class="show-grid">' +
-              '<div class="campo">Passagem de som: <b>' + (s.passagem_de_som ? "Sim" : "Não") +
-                (s.passagem_de_som && s.horario_passagem ? ' (' + esc(s.horario_passagem) + ')' : '') +
-              '</b></div>' +
-              '<div class="campo">Contato: <b>' + esc(s.contato) + '</b></div>' +
-            '</div>' +
-            (s.observacoes ? '<div class="obs">“' + esc(s.observacoes) + '”</div>' : '') +
-          '</article>'
-        );
-      }).join("");
+        var pass = s.passagem_de_som
+          ? "<b>Sim</b>" + (s.horario_passagem ? '<span class="sub">' + esc(s.horario_passagem) + "</span>" : "")
+          : "Não";
+        html +=
+          '<tr class="linha-show status-' + esc(s.status || "a_confirmar") +
+            (s.status === "cancelado" ? " linha-cancelado" : "") + '">' +
+            '<td class="data" data-rotulo="Data">' + esc(dataBR(s.data)) +
+              '<span class="dow">' + esc(dowBR(s.data)) + "</span>" +
+            "</td>" +
+            '<td class="hora" data-rotulo="Horário">' + ouVazio(s.horario) + "</td>" +
+            '<td class="local" data-rotulo="Local">' + esc(s.local || "") + "</td>" +
+            '<td class="endereco" data-rotulo="Endereço">' + ouVazio(s.endereco) + "</td>" +
+            '<td class="cidade" data-rotulo="Cidade">' + ouVazio(s.cidade) + "</td>" +
+            '<td class="pass" data-rotulo="Passagem">' + pass + "</td>" +
+            '<td class="contato" data-rotulo="Contato">' + ouVazio(s.contato) + "</td>" +
+            '<td class="status" data-rotulo="Status"><span class="selo ' + esc(s.status || "a_confirmar") + '">' + esc(st) + "</span></td>" +
+            '<td class="obs" data-rotulo="Obs.">' + ouVazio(s.observacoes, true) + "</td>" +
+          "</tr>";
+      });
+
+      html += "</tbody></table></div>";
+      box.innerHTML = html;
     })
     .catch(function (e) {
       document.getElementById("agenda").innerHTML =

@@ -9,6 +9,66 @@
     "horario_passagem": "19:30",
     "contato": "(34) 99999-0000 — produção do espaço",
     "status": "confirmado",
-    "observacoes": "Show de abertura da turnê Regrava. Chegar 1h antes para a passagem de som."
+    "observacoes": "Show de exemplo. Chegar 1h antes para a passagem de som."
+  },
+  {
+    "data": "2026-11-15",
+    "horario": "",
+    "local": "Mergulho",
+    "endereco": "",
+    "cidade": "",
+    "passagem_de_som": false,
+    "horario_passagem": "",
+    "contato": "",
+    "status": "a_confirmar",
+    "observacoes": "Anotado como '15/11 Mergulho' — data e local ainda a confirmar."
+  },
+  {
+    "data": "2026-11-27",
+    "horario": "",
+    "local": "Ribeirão Vermei",
+    "endereco": "",
+    "cidade": "",
+    "passagem_de_som": false,
+    "horario_passagem": "",
+    "contato": "",
+    "status": "a_confirmar",
+    "observacoes": "Data a definir: 27 ou 28/11. Local anotado como 'Ribeirão Vermei'."
+  },
+  {
+    "data": "2026-12-05",
+    "horario": "",
+    "local": "Formatura",
+    "endereco": "",
+    "cidade": "",
+    "passagem_de_som": false,
+    "horario_passagem": "",
+    "contato": "",
+    "status": "confirmado",
+    "observacoes": "Formatura da sobrinha (Thiatrim)."
+  },
+  {
+    "data": "2026-12-31",
+    "horario": "",
+    "local": "Réveillon Canastra",
+    "endereco": "",
+    "cidade": "",
+    "passagem_de_som": false,
+    "horario_passagem": "",
+    "contato": "",
+    "status": "confirmado",
+    "observacoes": "Réveillon na Canastra."
+  },
+  {
+    "data": "2027-11-13",
+    "horario": "",
+    "local": "Festa da Família Bruno",
+    "endereco": "",
+    "cidade": "",
+    "passagem_de_som": false,
+    "horario_passagem": "",
+    "contato": "",
+    "status": "confirmado",
+    "observacoes": "Festa de família do Bruno."
   }
 ]
