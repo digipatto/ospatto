@@ -14,23 +14,23 @@
   :root{
     --bg:#f7f1e2; --fg:#1f1c12; --muted:#8a8168; --line:#e7ddc6; --tint:#efe6d1;
     --gold:#cf8a07; --gold-ink:#2a1e02;
-    --green:#1f9d55; --green-bg:#e6f1e3; --green-line:#bfe0c5;
-    --red:#d6431f; --red-bg:#f8e2da; --red-line:#f0c3b2;
+    --green:#1f9d55; --green-bg:#cfe9d4; --green-line:#9ed3a8; --green-row:#e9f4e9;
+    --red:#d6431f; --red-bg:#f9d9cb; --red-line:#eeae97; --red-row:#fbeee7;
     --reg-g:#1f9d55; --reg-y:#f0b018; --reg-r:#d6431f;
   }
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --bg:#13150d; --fg:#f1ecdc; --muted:#938e78; --line:#2a2b1f; --tint:#1a1c12;
     --gold:#edc14e; --gold-ink:#241a04;
-    --green:#58c884; --green-bg:#16271b; --green-line:#2d4833;
-    --red:#ef6f4a; --red-bg:#2b1a13; --red-line:#4a2d20;
+    --green:#58c884; --green-bg:#1c3324; --green-line:#31513a; --green-row:#17241a;
+    --red:#ef6f4a; --red-bg:#38201a; --red-line:#4f3128; --red-row:#241a16;
     --reg-g:#58c884; --reg-y:#edc14e; --reg-r:#ef6f4a;
     color-scheme:dark;
   }}
   :root[data-theme="dark"]{
     --bg:#13150d; --fg:#f1ecdc; --muted:#938e78; --line:#2a2b1f; --tint:#1a1c12;
     --gold:#edc14e; --gold-ink:#241a04;
-    --green:#58c884; --green-bg:#16271b; --green-line:#2d4833;
-    --red:#ef6f4a; --red-bg:#2b1a13; --red-line:#4a2d20;
+    --green:#58c884; --green-bg:#1c3324; --green-line:#31513a; --green-row:#17241a;
+    --red:#ef6f4a; --red-bg:#38201a; --red-line:#4f3128; --red-row:#241a16;
     --reg-g:#58c884; --reg-y:#edc14e; --reg-r:#ef6f4a;
     color-scheme:dark;
   }
@@ -84,6 +84,10 @@
   .status .dot{width:7px;height:7px;border-radius:50%;flex:none}
   .status.ok{color:var(--green);background:var(--green-bg);border-color:var(--green-line)} .status.ok .dot{background:var(--green)}
   .status.neg{color:var(--red);background:var(--red-bg);border-color:var(--red-line)} .status.neg .dot{background:var(--red)}
+  /* linha do show levemente tingida: verde clarinho = confirmado, vermelho clarinho = negociando */
+  .row.ok{background:var(--green-row)}
+  .row.neg{background:var(--red-row)}
+  .row.past{opacity:.45}
 
   .edit{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;
     color:var(--muted);text-decoration:none;border:1.5px solid var(--line);transition:color .12s,border-color .12s}
@@ -157,7 +161,7 @@
     shows.forEach(function(s){
       var d=parse(s.data), ok=s.status==="confirmado", past=d<tod;
       var hora=(s.horario&&String(s.horario).trim())?'<b>'+esc(s.horario)+'</b>':'a definir';
-      html+='<li class="row'+(past?" past":"")+'">'+
+      html+='<li class="row '+(ok?"ok":"neg")+(past?" past":"")+'">'+
         '<div class="when"><div class="dt">'+dataBR(d)+'</div>'+
           '<div class="hr">'+DIAS[d.getDay()]+' · '+hora+'</div></div>'+
         '<div class="name">'+esc(nome(s))+'</div>'+
