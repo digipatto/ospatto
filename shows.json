@@ -1,0 +1,14 @@
+[
+  {
+    "data": "2026-11-07",
+    "horario": "21:30",
+    "local": "Espaço Canastra",
+    "endereco": "Rua das Cachoeiras, 250",
+    "cidade": "Araxá/MG",
+    "passagem_de_som": true,
+    "horario_passagem": "19:30",
+    "contato": "(34) 99999-0000 — produção do espaço",
+    "status": "confirmado",
+    "observacoes": "Show de abertura da turnê Regrava. Chegar 1h antes para a passagem de som."
+  }
+]
