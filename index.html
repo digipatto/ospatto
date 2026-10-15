@@ -30,7 +30,7 @@
       radial-gradient(ellipse 70% 40% at 10% 90%, rgba(192,57,43,.06), transparent 60%);
     background-attachment: fixed;
   }
-  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
 
   /* ---------- Cabeçalho ---------- */
   header {
@@ -84,16 +84,36 @@
   .contagem {
     color: var(--texto-2);
     font-size: .82rem;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
     letter-spacing: .04em;
   }
+  .linha-topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .btn-novo {
+    background: var(--rock-3);
+    color: var(--dourado);
+    border: 1px solid var(--edge);
+    border-radius: 8px;
+    padding: 9px 16px;
+    cursor: pointer;
+    font-size: .86rem;
+    font-weight: 700;
+    font-family: inherit;
+  }
+  .btn-novo:hover { border-color: var(--dourado); }
 
   /* ---------- Tabela de shows (desktop) ---------- */
   .tabela-wrap {
     background: var(--rock-2);
     border: 1px solid var(--edge);
     border-radius: 12px;
-    overflow: hidden;
+    overflow-x: auto;
     box-shadow: 0 4px 18px rgba(0,0,0,.35);
   }
   table.agenda {
@@ -143,6 +163,19 @@
   td .nenhum { color: #6e6556; font-style: italic; }
   td.pass b { color: var(--texto); font-weight: 600; }
   td.obs { color: var(--texto-2); font-style: italic; font-size: .86rem; min-width: 150px; }
+  .marca-edit {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    font-size: .58rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    border: 1px solid rgba(224,163,37,.5);
+    vertical-align: middle;
+  }
   .selo {
     display: inline-block;
     padding: 4px 12px;
@@ -171,6 +204,47 @@
     color: #f0b3a8;
     font-size: .92rem;
   }
+  td.acoes { white-space: nowrap; }
+  .btn-edit {
+    background: var(--rock-3);
+    color: var(--dourado);
+    border: 1px solid var(--edge);
+    border-radius: 8px;
+    padding: 7px 11px;
+    cursor: pointer;
+    font-size: .9rem;
+    font-family: inherit;
+    font-weight: 700;
+  }
+  .btn-edit:hover { border-color: var(--dourado); }
+  .btn-edit .txt-edit { display: none; }
+
+  /* ---------- Aviso de alterações locais ---------- */
+  .aviso-local {
+    margin-bottom: 18px;
+    background: rgba(224,163,37,.09);
+    border: 1px solid rgba(224,163,37,.45);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: .88rem;
+    color: var(--texto-2);
+  }
+  .aviso-local p { margin-bottom: 10px; }
+  .aviso-local b { color: var(--dourado); }
+  .aviso-acoes { display: flex; flex-wrap: wrap; gap: 10px; }
+  .aviso-acoes button {
+    background: var(--rock-2);
+    color: var(--dourado);
+    border: 1px solid var(--edge);
+    border-radius: 8px;
+    padding: 9px 16px;
+    cursor: pointer;
+    font-size: .84rem;
+    font-weight: 700;
+    font-family: inherit;
+  }
+  .aviso-acoes button:hover { border-color: var(--dourado); }
+  .aviso-acoes button.btn-descartar { color: #e8705f; }
 
   /* ---------- Botão adicionar show ---------- */
   .cta {
@@ -221,6 +295,132 @@
   }
   .modelo button:hover { border-color: var(--dourado); }
 
+  /* ---------- Modal de edição ---------- */
+  .modal-fundo {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 100;
+  }
+  .modal-fundo[hidden] { display: none; }
+  .modal {
+    background: var(--rock-2);
+    border: 1px solid var(--edge);
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+    max-width: 560px;
+    max-height: 94vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 20px 28px;
+  }
+  .modal-cab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--edge);
+  }
+  .modal-cab h3 {
+    font-family: Georgia, serif;
+    font-size: 1.15rem;
+    color: var(--creme);
+  }
+  .modal-x {
+    background: none;
+    border: none;
+    color: var(--texto-2);
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+  }
+  .modal-x:hover { color: var(--dourado); }
+  .campo-form { margin-bottom: 14px; }
+  .campo-form label {
+    display: block;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    margin-bottom: 5px;
+  }
+  .campo-form input[type="text"],
+  .campo-form input[type="date"],
+  .campo-form input[type="time"],
+  .campo-form select,
+  .campo-form textarea {
+    width: 100%;
+    background: var(--rock-3);
+    border: 1px solid var(--edge);
+    border-radius: 8px;
+    padding: 11px 12px;
+    color: var(--texto);
+    font-size: 16px;          /* 16px evita zoom automático no iOS */
+    font-family: inherit;
+  }
+  .campo-form input:focus, .campo-form select:focus, .campo-form textarea:focus {
+    outline: none;
+    border-color: var(--dourado);
+  }
+  .campo-form textarea { resize: vertical; min-height: 72px; }
+  .campo-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--rock-3);
+    border: 1px solid var(--edge);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 14px;
+    cursor: pointer;
+  }
+  .campo-check input { width: 20px; height: 20px; accent-color: var(--verde); }
+  .campo-check span { font-size: .92rem; color: var(--texto); }
+  .dupla { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .modal-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    position: sticky;
+    bottom: -28px;
+    background: var(--rock-2);
+    padding: 14px 0 4px;
+  }
+  .modal-acoes button {
+    flex: 1 1 auto;
+    padding: 13px 18px;
+    border-radius: 10px;
+    font-size: .95rem;
+    font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
+    border: 1px solid var(--edge);
+  }
+  .btn-salvar {
+    background: linear-gradient(135deg, var(--verde), var(--dourado));
+    color: #0b0906;
+    border: none !important;
+  }
+  .btn-excluir {
+    background: transparent;
+    color: #e8705f;
+    border-color: rgba(192,57,43,.5) !important;
+    flex: 0 0 auto !important;
+  }
+  .btn-cancelar-modal {
+    background: var(--rock-3);
+    color: var(--texto-2);
+    flex: 0 0 auto !important;
+  }
+
   /* ---------- Rodapé ---------- */
   footer {
     margin-top: 60px;
@@ -262,7 +462,7 @@
   /* ---------- Mobile: a tabela vira "ficha" por show ---------- */
   @media (max-width: 700px) {
     .wrap { padding: 0 14px; }
-    .tabela-wrap { background: transparent; border: none; box-shadow: none; border-radius: 0; }
+    .tabela-wrap { background: transparent; border: none; box-shadow: none; border-radius: 0; overflow-x: visible; }
     table.agenda, table.agenda tbody, table.agenda tr, table.agenda td { display: block; width: 100%; }
     table.agenda thead { display: none; }           /* sem cabeçalho no celular */
     table.agenda tr {
@@ -318,6 +518,20 @@
     table.agenda td .sub { display: inline; margin: 0 0 0 6px; }
     table.agenda td.obs { font-size: .88rem; }
     table.agenda td.obs::before { padding-top: 0; }
+    table.agenda td.acoes {
+      padding-top: 12px;
+      margin-top: 6px;
+      border-top: 1px dashed rgba(58,47,34,.6) !important;
+    }
+    table.agenda td.acoes::before { content: none; }
+    .btn-edit { width: 100%; padding: 12px; font-size: .95rem; }
+    .btn-edit .txt-edit { display: inline; }
+    .modal { border-radius: 16px 16px 0 0; }
+    .modal-acoes { bottom: -20px; }
+  }
+  @media (min-width: 701px) {
+    .modal-fundo { align-items: center; }
+    .modal { border-radius: 16px; }
   }
 </style>
 </head>
@@ -330,7 +544,10 @@
 
 <main class="wrap">
   <h2 class="secao">Próximos Shows</h2>
-  <p class="contagem" id="contagem"></p>
+  <div class="linha-topo">
+    <p class="contagem" id="contagem" style="margin-bottom:0"></p>
+    <button type="button" class="btn-novo" onclick="novoShow()">＋ Novo show (neste aparelho)</button>
+  </div>
   <div id="agenda"><p class="vazio">Carregando agenda…</p></div>
 
   <div class="cta">
@@ -355,8 +572,72 @@
   <p class="copy">Os Patto — Reggae Rock Canastra · Araxá/MG · Desde 2006</p>
 </footer>
 
+<!-- ---------- Modal de edição ---------- -->
+<div class="modal-fundo" id="modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+    <div class="modal-cab">
+      <h3 id="modal-titulo">Editar show</h3>
+      <button type="button" class="modal-x" onclick="fecharModal()" aria-label="Fechar">✕</button>
+    </div>
+    <form id="form-edit" autocomplete="off">
+      <div class="dupla">
+        <div class="campo-form">
+          <label for="f-data">Data</label>
+          <input type="date" id="f-data" required>
+        </div>
+        <div class="campo-form">
+          <label for="f-horario">Horário</label>
+          <input type="time" id="f-horario">
+        </div>
+      </div>
+      <div class="campo-form">
+        <label for="f-local">Local</label>
+        <input type="text" id="f-local" placeholder="Nome do lugar">
+      </div>
+      <div class="campo-form">
+        <label for="f-endereco">Endereço</label>
+        <input type="text" id="f-endereco" placeholder="Rua, número">
+      </div>
+      <div class="campo-form">
+        <label for="f-cidade">Cidade</label>
+        <input type="text" id="f-cidade" placeholder="Araxá/MG">
+      </div>
+      <label class="campo-check" for="f-passagem">
+        <input type="checkbox" id="f-passagem">
+        <span>Passagem de som</span>
+      </label>
+      <div class="campo-form">
+        <label for="f-horario-passagem">Horário da passagem</label>
+        <input type="time" id="f-horario-passagem">
+      </div>
+      <div class="campo-form">
+        <label for="f-contato">Contato</label>
+        <input type="text" id="f-contato" placeholder="Nome e telefone">
+      </div>
+      <div class="campo-form">
+        <label for="f-status">Status</label>
+        <select id="f-status">
+          <option value="confirmado">Confirmado</option>
+          <option value="a_confirmar">A confirmar</option>
+          <option value="cancelado">Cancelado</option>
+        </select>
+      </div>
+      <div class="campo-form">
+        <label for="f-observacoes">Observações</label>
+        <textarea id="f-observacoes" placeholder="Informações extras..."></textarea>
+      </div>
+      <div class="modal-acoes">
+        <button type="submit" class="btn-salvar">💾 Salvar</button>
+        <button type="button" class="btn-excluir" id="btn-excluir" onclick="excluirShowAtual()">🗑 Excluir</button>
+        <button type="button" class="btn-cancelar-modal" onclick="fecharModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
   var BOT = "Patto370Bot";
+  var LS_KEY = "ospatto_agenda_local_v1";
 
   var MODELO = [
     "🎸 NOVO SHOW — OS PATTO",
@@ -371,6 +652,16 @@
     "Observações: ..."
   ].join("\n");
 
+  var CAMPOS = ["data","horario","local","endereco","cidade","passagem_de_som","horario_passagem","contato","status","observacoes"];
+  var NOME_STATUS = {
+    "confirmado": "Confirmado",
+    "a_confirmar": "A confirmar",
+    "cancelado": "Cancelado"
+  };
+
+  var jsonBase = null;     // shows.json como veio do repo
+  var editandoId = null;   // id do show sendo editado (null = novo show)
+
   // Telegram não pré-preenche mensagens em links de bot (?text= é só para
   // usuários/canais; bots usam ?start=, limitado a 64 caracteres).
   // Então o botão abre o bot direto e o modelo completo fica visível aqui
@@ -379,14 +670,32 @@
   document.getElementById("modelo-texto").textContent = MODELO;
 
   function copiarModelo() {
-    var t = MODELO;
+    copiarTexto(MODELO, this);
+  }
+
+  function copiarTexto(t, btn) {
+    var feito = function () {
+      if (btn) {
+        var antigo = btn.textContent;
+        btn.textContent = "✅ Copiado!";
+        setTimeout(function () { btn.textContent = antigo; }, 2000);
+      }
+    };
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(t);
+      navigator.clipboard.writeText(t).then(feito, function () { fallbackCopiar(t); feito(); });
     } else {
-      var ta = document.createElement("textarea");
-      ta.value = t; document.body.appendChild(ta); ta.select();
-      document.execCommand("copy"); document.body.removeChild(ta);
+      fallbackCopiar(t); feito();
     }
+  }
+  function fallbackCopiar(t) {
+    var ta = document.createElement("textarea");
+    ta.value = t;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
   }
 
   function esc(s) {
@@ -418,65 +727,269 @@
       ? '<span class="nenhum">' + (italico ? "não informado" : "—") + '</span>'
       : esc(v);
   }
-  var NOME_STATUS = {
-    "confirmado": "Confirmado",
-    "a_confirmar": "A confirmar",
-    "cancelado": "Cancelado"
-  };
 
+  /* ---------- Alterações locais (persistem neste aparelho) ---------- */
+  function loadLocal() {
+    try {
+      var l = JSON.parse(localStorage.getItem(LS_KEY));
+      if (l && typeof l === "object") {
+        return {
+          edits: l.edits || {},
+          novos: Array.isArray(l.novos) ? l.novos : [],
+          excluidos: Array.isArray(l.excluidos) ? l.excluidos : []
+        };
+      }
+    } catch (e) {}
+    return { edits: {}, novos: [], excluidos: [] };
+  }
+  function saveLocal(l) {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(l)); } catch (e) {}
+  }
+  function idDe(s) {
+    return (String(s.data || "") + "_" + String(s.local || ""))
+      .toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "sem_id";
+  }
+  function limparCampos(s) {
+    var o = {};
+    CAMPOS.forEach(function (c) {
+      if (c === "passagem_de_som") o[c] = !!s[c];
+      else o[c] = (s[c] === null || s[c] === undefined) ? "" : String(s[c]);
+    });
+    return o;
+  }
+  function mesclar(base, local) {
+    var out = [];
+    base.forEach(function (s) {
+      var id = idDe(s);
+      if (local.excluidos.indexOf(id) !== -1) return;
+      var m = Object.assign({}, s, local.edits[id] || {});
+      m._id = id;
+      m._editado = !!local.edits[id];
+      out.push(m);
+    });
+    local.novos.forEach(function (n) {
+      var c = Object.assign({}, n);
+      c._id = c._id || ("novo_" + Date.now() + "_" + Math.floor(Math.random() * 1e6));
+      c._editado = true;
+      out.push(c);
+    });
+    out.sort(function (a, b) {
+      return String(a.data || "").localeCompare(String(b.data || ""));
+    });
+    return out;
+  }
+  function totalLocal(l) {
+    return Object.keys(l.edits).length + l.novos.length + l.excluidos.length;
+  }
+
+  /* ---------- Render ---------- */
+  function render() {
+    var local = loadLocal();
+    var shows = mesclar(jsonBase, local);
+    var box = document.getElementById("agenda");
+
+    // aviso de alterações locais
+    var avisoAntigo = document.getElementById("aviso-local");
+    if (avisoAntigo) avisoAntigo.remove();
+    if (totalLocal(local) > 0) {
+      var aviso = document.createElement("div");
+      aviso.className = "aviso-local";
+      aviso.id = "aviso-local";
+      aviso.innerHTML =
+        "<p>✏️ <b>" + totalLocal(local) + " alteração(ões)</b> salvas só neste aparelho. " +
+        "Elas aparecem pra você, mas o site público ainda mostra a agenda antiga. " +
+        "Pra valer pra todo mundo, copie o shows.json abaixo e me mande (ou commite no repo).</p>" +
+        '<div class="aviso-acoes">' +
+        '<button type="button" id="btn-copiar-json">📋 Copiar shows.json atualizado</button>' +
+        '<button type="button" class="btn-descartar" id="btn-descartar">↩️ Descartar alterações locais</button>' +
+        "</div>";
+      box.parentNode.insertBefore(aviso, box);
+      document.getElementById("btn-copiar-json").onclick = function () {
+        copiarTexto(JSON.stringify(shows.map(limparCampos), null, 2), this);
+      };
+      document.getElementById("btn-descartar").onclick = function () {
+        if (window.confirm("Descartar todas as alterações locais e voltar à agenda publicada?")) {
+          try { localStorage.removeItem(LS_KEY); } catch (e) {}
+          render();
+        }
+      };
+    }
+
+    document.getElementById("contagem").textContent =
+      shows.length + (shows.length === 1 ? " show na estrada" : " shows na estrada") + " · ordenados por data";
+
+    if (!shows.length) {
+      box.innerHTML = '<p class="vazio">Nenhum show na agenda ainda. Seja o primeiro a cadastrar!</p>';
+      return;
+    }
+
+    var html = '<div class="tabela-wrap"><table class="agenda"><thead><tr>' +
+      "<th>Data</th><th>Horário</th><th>Local</th><th>Endereço</th><th>Cidade</th>" +
+      "<th>Passagem</th><th>Contato</th><th>Status</th><th>Observações</th><th>Ações</th>" +
+      "</tr></thead><tbody>";
+
+    var mesAtual = null;
+    shows.forEach(function (s) {
+      var mes = mesBR(s.data);
+      if (mes !== mesAtual) {
+        html += '<tr class="cabecalho-mes"><td colspan="10">' + esc(mes) + "</td></tr>";
+        mesAtual = mes;
+      }
+      var st = NOME_STATUS[s.status] || s.status || "A confirmar";
+      var pass = s.passagem_de_som
+        ? "<b>Sim</b>" + (s.horario_passagem ? '<span class="sub">' + esc(s.horario_passagem) + "</span>" : "")
+        : "Não";
+      html +=
+        '<tr class="linha-show status-' + esc(s.status || "a_confirmar") +
+          (s.status === "cancelado" ? " linha-cancelado" : "") + '">' +
+          '<td class="data" data-rotulo="Data">' + esc(dataBR(s.data)) +
+            '<span class="dow">' + esc(dowBR(s.data)) + "</span>" +
+            (s._editado ? '<span class="marca-edit">editado</span>' : "") +
+          "</td>" +
+          '<td class="hora" data-rotulo="Horário">' + ouVazio(s.horario) + "</td>" +
+          '<td class="local" data-rotulo="Local">' + esc(s.local || "") + "</td>" +
+          '<td class="endereco" data-rotulo="Endereço">' + ouVazio(s.endereco) + "</td>" +
+          '<td class="cidade" data-rotulo="Cidade">' + ouVazio(s.cidade) + "</td>" +
+          '<td class="pass" data-rotulo="Passagem">' + pass + "</td>" +
+          '<td class="contato" data-rotulo="Contato">' + ouVazio(s.contato) + "</td>" +
+          '<td class="status" data-rotulo="Status"><span class="selo ' + esc(s.status || "a_confirmar") + '">' + esc(st) + "</span></td>" +
+          '<td class="obs" data-rotulo="Obs.">' + ouVazio(s.observacoes, true) + "</td>" +
+          '<td class="acoes" data-rotulo="Ações">' +
+            '<button type="button" class="btn-edit" onclick="abrirEdicao(\'' + esc(s._id) + '\')">✏️<span class="txt-edit"> Editar show</span></button>' +
+          "</td>" +
+        "</tr>";
+    });
+
+    html += "</tbody></table></div>";
+    box.innerHTML = html;
+  }
+
+  /* ---------- Modal ---------- */
+  function abrirEdicao(id) {
+    var shows = mesclar(jsonBase, loadLocal());
+    var s = null;
+    for (var i = 0; i < shows.length; i++) {
+      if (shows[i]._id === id) { s = shows[i]; break; }
+    }
+    if (!s) return;
+    editandoId = id;
+    preencherForm(s);
+    document.getElementById("modal-titulo").textContent = "Editar show — " + dataBR(s.data);
+    document.getElementById("btn-excluir").style.display = "";
+    document.getElementById("modal").hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function novoShow() {
+    editandoId = null;
+    preencherForm({ data: "", horario: "", local: "", endereco: "", cidade: "", passagem_de_som: false, horario_passagem: "", contato: "", status: "a_confirmar", observacoes: "" });
+    document.getElementById("modal-titulo").textContent = "Novo show";
+    document.getElementById("btn-excluir").style.display = "none";
+    document.getElementById("modal").hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function preencherForm(s) {
+    document.getElementById("f-data").value = s.data || "";
+    document.getElementById("f-horario").value = s.horario || "";
+    document.getElementById("f-local").value = s.local || "";
+    document.getElementById("f-endereco").value = s.endereco || "";
+    document.getElementById("f-cidade").value = s.cidade || "";
+    document.getElementById("f-passagem").checked = !!s.passagem_de_som;
+    document.getElementById("f-horario-passagem").value = s.horario_passagem || "";
+    document.getElementById("f-contato").value = s.contato || "";
+    document.getElementById("f-status").value = NOME_STATUS[s.status] ? s.status : "a_confirmar";
+    document.getElementById("f-observacoes").value = s.observacoes || "";
+    togglePassagem();
+  }
+
+  function coletarForm() {
+    return {
+      data: document.getElementById("f-data").value,
+      horario: document.getElementById("f-horario").value,
+      local: document.getElementById("f-local").value.trim(),
+      endereco: document.getElementById("f-endereco").value.trim(),
+      cidade: document.getElementById("f-cidade").value.trim(),
+      passagem_de_som: document.getElementById("f-passagem").checked,
+      horario_passagem: document.getElementById("f-horario-passagem").value,
+      contato: document.getElementById("f-contato").value.trim(),
+      status: document.getElementById("f-status").value,
+      observacoes: document.getElementById("f-observacoes").value.trim()
+    };
+  }
+
+  function fecharModal() {
+    document.getElementById("modal").hidden = true;
+    document.body.style.overflow = "";
+    editandoId = null;
+  }
+
+  function togglePassagem() {
+    var on = document.getElementById("f-passagem").checked;
+    var hp = document.getElementById("f-horario-passagem");
+    hp.disabled = !on;
+    hp.style.opacity = on ? "1" : ".45";
+  }
+  document.getElementById("f-passagem").addEventListener("change", togglePassagem);
+
+  document.getElementById("form-edit").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var campos = coletarForm();
+    if (!campos.data) { window.alert("Preencha a data do show."); return; }
+    var local = loadLocal();
+    if (editandoId) {
+      var idxNovo = -1;
+      local.novos.forEach(function (n, i) { if (n._id === editandoId) idxNovo = i; });
+      if (idxNovo !== -1) {
+        var n = Object.assign({}, campos);
+        n._id = editandoId;
+        local.novos[idxNovo] = n;
+      } else {
+        local.edits[editandoId] = campos;
+      }
+    } else {
+      var novo = Object.assign({}, campos);
+      novo._id = "novo_" + Date.now() + "_" + Math.floor(Math.random() * 1e6);
+      local.novos.push(novo);
+    }
+    saveLocal(local);
+    fecharModal();
+    render();
+  });
+
+  function excluirShowAtual() {
+    if (!editandoId) return;
+    if (!window.confirm("Excluir este show da agenda?")) return;
+    var local = loadLocal();
+    var idxNovo = -1;
+    local.novos.forEach(function (n, i) { if (n._id === editandoId) idxNovo = i; });
+    if (idxNovo !== -1) {
+      local.novos.splice(idxNovo, 1);
+    } else {
+      if (local.excluidos.indexOf(editandoId) === -1) local.excluidos.push(editandoId);
+      delete local.edits[editandoId];
+    }
+    saveLocal(local);
+    fecharModal();
+    render();
+  }
+
+  document.getElementById("modal").addEventListener("click", function (e) {
+    if (e.target === this) fecharModal();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !document.getElementById("modal").hidden) fecharModal();
+  });
+
+  /* ---------- Carga inicial ---------- */
   fetch("shows.json", { cache: "no-store" })
     .then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status + " ao carregar shows.json");
       return r.json();
     })
     .then(function (shows) {
-      var box = document.getElementById("agenda");
-      if (!Array.isArray(shows) || shows.length === 0) {
-        box.innerHTML = '<p class="vazio">Nenhum show na agenda ainda. Seja o primeiro a cadastrar!</p>';
-        return;
-      }
-      shows.sort(function (a, b) {
-        return String(a.data || "").localeCompare(String(b.data || ""));
-      });
-
-      document.getElementById("contagem").textContent =
-        shows.length + (shows.length === 1 ? " show na estrada" : " shows na estrada") + " · ordenados por data";
-
-      var html = '<div class="tabela-wrap"><table class="agenda"><thead><tr>' +
-        "<th>Data</th><th>Horário</th><th>Local</th><th>Endereço</th><th>Cidade</th>" +
-        "<th>Passagem</th><th>Contato</th><th>Status</th><th>Observações</th>" +
-        "</tr></thead><tbody>";
-
-      var mesAtual = null;
-      shows.forEach(function (s) {
-        var mes = mesBR(s.data);
-        if (mes !== mesAtual) {
-          html += '<tr class="cabecalho-mes"><td colspan="9">' + esc(mes) + "</td></tr>";
-          mesAtual = mes;
-        }
-        var st = NOME_STATUS[s.status] || s.status || "A confirmar";
-        var pass = s.passagem_de_som
-          ? "<b>Sim</b>" + (s.horario_passagem ? '<span class="sub">' + esc(s.horario_passagem) + "</span>" : "")
-          : "Não";
-        html +=
-          '<tr class="linha-show status-' + esc(s.status || "a_confirmar") +
-            (s.status === "cancelado" ? " linha-cancelado" : "") + '">' +
-            '<td class="data" data-rotulo="Data">' + esc(dataBR(s.data)) +
-              '<span class="dow">' + esc(dowBR(s.data)) + "</span>" +
-            "</td>" +
-            '<td class="hora" data-rotulo="Horário">' + ouVazio(s.horario) + "</td>" +
-            '<td class="local" data-rotulo="Local">' + esc(s.local || "") + "</td>" +
-            '<td class="endereco" data-rotulo="Endereço">' + ouVazio(s.endereco) + "</td>" +
-            '<td class="cidade" data-rotulo="Cidade">' + ouVazio(s.cidade) + "</td>" +
-            '<td class="pass" data-rotulo="Passagem">' + pass + "</td>" +
-            '<td class="contato" data-rotulo="Contato">' + ouVazio(s.contato) + "</td>" +
-            '<td class="status" data-rotulo="Status"><span class="selo ' + esc(s.status || "a_confirmar") + '">' + esc(st) + "</span></td>" +
-            '<td class="obs" data-rotulo="Obs.">' + ouVazio(s.observacoes, true) + "</td>" +
-          "</tr>";
-      });
-
-      html += "</tbody></table></div>";
-      box.innerHTML = html;
+      jsonBase = Array.isArray(shows) ? shows : [];
+      render();
     })
     .catch(function (e) {
       document.getElementById("agenda").innerHTML =
