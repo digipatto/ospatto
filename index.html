@@ -7,13 +7,13 @@
 <meta name="description" content="Agenda de shows da banda Os Patto — Reggae Rock Canastra, há 20 anos entre Araxá/MG e a Serra da Canastra.">
 <style>
   :root {
-    --rock: #12100e;          /* base escura e crua */
+    --rock: #12100e;
     --rock-2: #1c1915;
     --rock-3: #262019;
     --edge: #3a2f22;
-    --verde: #1db954;         /* acentos reggae */
+    --verde: #1db954;
+    --vermelho: #e0483a;
     --dourado: #e0a325;
-    --vermelho: #c0392b;      /* vermelho terroso */
     --creme: #f2ead9;
     --texto: #e8e1d3;
     --texto-2: #b7ac99;
@@ -23,34 +23,20 @@
     font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
     background: var(--rock);
     color: var(--texto);
-    line-height: 1.55;
+    line-height: 1.5;
     background-image:
-      radial-gradient(ellipse 90% 45% at 50% -5%, rgba(29,185,84,.10), transparent 60%),
-      radial-gradient(ellipse 70% 35% at 85% 15%, rgba(224,163,37,.07), transparent 60%),
-      radial-gradient(ellipse 70% 40% at 10% 90%, rgba(192,57,43,.06), transparent 60%);
+      radial-gradient(ellipse 90% 45% at 50% -5%, rgba(29,185,84,.09), transparent 60%),
+      radial-gradient(ellipse 70% 35% at 85% 15%, rgba(224,163,37,.06), transparent 60%);
     background-attachment: fixed;
   }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 18px; }
 
   /* ---------- Cabeçalho ---------- */
-  header {
-    text-align: center;
-    padding: 52px 20px 40px;
-    position: relative;
-    overflow: hidden;
-  }
-  header::after {
-    content: "";
-    display: block;
-    width: 120px; height: 4px;
-    margin: 26px auto 0;
-    border-radius: 4px;
-    background: linear-gradient(90deg, var(--verde) 0 33%, var(--dourado) 33% 66%, var(--vermelho) 66% 100%);
-  }
+  header { text-align: center; padding: 48px 20px 34px; }
   .banda {
     font-family: Georgia, "Times New Roman", serif;
     font-weight: 800;
-    font-size: clamp(2.6rem, 9vw, 4.6rem);
+    font-size: clamp(2.4rem, 9vw, 4rem);
     letter-spacing: .02em;
     line-height: 1.05;
     text-transform: uppercase;
@@ -59,209 +45,135 @@
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 2px 24px rgba(224,163,37,.18);
   }
   .tagline {
-    margin-top: 12px;
+    margin-top: 10px;
     color: var(--texto-2);
-    font-size: clamp(1rem, 3.5vw, 1.15rem);
+    font-size: clamp(.95rem, 3.5vw, 1.1rem);
     font-style: italic;
-    letter-spacing: .01em;
   }
 
-  /* ---------- Seções ---------- */
-  h2.secao {
-    font-family: Georgia, serif;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    margin: 40px 0 6px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  h2.secao::after { content: ""; flex: 1; height: 1px; background: var(--edge); }
-  .contagem {
-    color: var(--texto-2);
-    font-size: .82rem;
-    margin-bottom: 14px;
-    letter-spacing: .04em;
-  }
-  .contagem b { color: var(--dourado); font-weight: 700; }
-  .linha-topo {
+  /* ---------- Lista ---------- */
+  .lista-topo {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    margin-bottom: 18px;
+    margin: 10px 0 6px;
   }
+  h2.secao {
+    font-family: Georgia, serif;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--creme);
+  }
+  .contagem { color: var(--texto-2); font-size: .8rem; }
   .btn-novo {
     background: var(--rock-3);
     color: var(--dourado);
     border: 1px solid var(--edge);
     border-radius: 8px;
-    padding: 9px 16px;
+    padding: 8px 14px;
     cursor: pointer;
-    font-size: .86rem;
+    font-size: .84rem;
     font-weight: 700;
     font-family: inherit;
   }
   .btn-novo:hover { border-color: var(--dourado); }
 
-  /* ---------- Tabela-resumo (desktop) ---------- */
-  .tabela-wrap {
-    background: var(--rock-2);
-    border: 1px solid var(--edge);
-    border-radius: 12px;
-    overflow-x: auto;
-    box-shadow: 0 4px 18px rgba(0,0,0,.35);
-  }
-  table.agenda {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: .92rem;
-  }
-  table.agenda th {
-    background: var(--rock-3);
-    color: var(--dourado);
-    font-size: .74rem;
-    font-weight: 800;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    text-align: left;
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--edge);
-    white-space: nowrap;
-  }
-  table.agenda td {
-    padding: 12px 14px;
-    border-bottom: 1px solid rgba(58,47,34,.6);
-    vertical-align: middle;
-  }
-  table.agenda tr.linha-show { cursor: pointer; }
-  table.agenda tr.linha-show:hover td { background: rgba(224,163,37,.05); }
-  table.agenda tr:last-child td { border-bottom: none; }
-  table.agenda tr.cabecalho-mes td {
-    background: rgba(224,163,37,.07);
-    color: var(--dourado);
-    font-family: Georgia, serif;
-    font-size: .8rem;
-    font-weight: 700;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    padding: 9px 14px;
+  ul.lista { list-style: none; margin-top: 10px; }
+  ul.lista li.item {
+    display: grid;
+    grid-template-columns: 96px 1fr auto 34px;
+    gap: 14px;
+    align-items: center;
+    padding: 15px 4px;
     border-bottom: 1px solid var(--edge);
   }
-  td.data {
+  ul.lista li.item:first-child { border-top: 1px solid var(--edge); }
+  .i-data {
     font-family: Georgia, serif;
-    font-size: 1.08rem;
     font-weight: 700;
+    font-size: 1.02rem;
     color: var(--creme);
     white-space: nowrap;
   }
-  td.data .dow { color: var(--texto-2); font-size: .72rem; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; margin-left: 6px; }
-  td.local { font-weight: 700; color: var(--texto); }
-  td.hora { color: var(--texto-2); white-space: nowrap; }
-  td .nenhum { color: #6e6556; font-style: italic; }
-  .marca-edit {
-    display: inline-block;
-    margin-left: 6px;
-    padding: 1px 7px;
-    border-radius: 999px;
-    font-size: .58rem;
-    font-weight: 800;
-    letter-spacing: .08em;
+  .i-data em {
+    display: block;
+    font-style: normal;
+    font-family: "Segoe UI", sans-serif;
+    font-size: .68rem;
+    font-weight: 400;
+    color: var(--texto-2);
+    letter-spacing: .06em;
     text-transform: uppercase;
-    color: var(--dourado);
-    border: 1px solid rgba(224,163,37,.5);
-    vertical-align: middle;
   }
+  .i-nome { font-size: 1rem; color: var(--texto); }
+  .i-nome .vazio { color: #6e6556; font-style: italic; }
   .selo {
     display: inline-block;
     padding: 4px 12px;
     border-radius: 999px;
     font-size: .68rem;
     font-weight: 800;
-    letter-spacing: .08em;
+    letter-spacing: .07em;
     text-transform: uppercase;
     white-space: nowrap;
   }
-  .selo.confirmado { background: rgba(29,185,84,.15); color: var(--verde); border: 1px solid rgba(29,185,84,.5); }
-  .selo.a_confirmar { background: rgba(224,163,37,.15); color: var(--dourado); border: 1px solid rgba(224,163,37,.5); }
-  .selo.cancelado  { background: rgba(192,57,43,.15); color: #e8705f; border: 1px solid rgba(192,57,43,.5); }
-  tr.linha-cancelado td { opacity: .6; }
-  .vazio {
+  .selo.confirmado { background: rgba(29,185,84,.16); color: var(--verde); border: 1px solid rgba(29,185,84,.55); }
+  .selo.negociando { background: rgba(224,72,58,.16); color: var(--vermelho); border: 1px solid rgba(224,72,58,.55); }
+  .selo.cancelado  { background: rgba(120,110,95,.12); color: #8d8371; border: 1px solid rgba(120,110,95,.4); }
+  li.cancelado .i-nome, li.cancelado .i-data { opacity: .55; }
+  li.cancelado .i-nome { text-decoration: line-through; }
+  .marca-edit {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 6px;
+    border-radius: 999px;
+    font-size: .55rem;
+    font-weight: 800;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    border: 1px solid rgba(224,163,37,.5);
+    vertical-align: middle;
+  }
+  .btn-edit {
+    background: none;
+    border: none;
+    color: var(--texto-2);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    line-height: 1;
+  }
+  .btn-edit:hover { color: var(--dourado); background: var(--rock-3); }
+  .vazio-lista {
     text-align: center;
     color: var(--texto-2);
     padding: 40px 0;
     font-style: italic;
   }
   .erro {
-    background: rgba(192,57,43,.12);
-    border: 1px solid rgba(192,57,43,.5);
+    background: rgba(224,72,58,.12);
+    border: 1px solid rgba(224,72,58,.5);
     border-radius: 10px;
     padding: 16px;
     color: #f0b3a8;
     font-size: .92rem;
   }
-  td.acoes { white-space: nowrap; text-align: right; }
-  .btn-edit {
-    background: var(--rock-3);
-    color: var(--dourado);
-    border: 1px solid var(--edge);
-    border-radius: 8px;
-    padding: 7px 11px;
-    cursor: pointer;
-    font-size: .9rem;
-    font-family: inherit;
-    font-weight: 700;
-  }
-  .btn-edit:hover { border-color: var(--dourado); }
-  .btn-edit .txt-edit { display: none; }
-  .chev {
-    display: inline-block;
-    color: var(--dourado);
-    font-size: .85rem;
-    margin-right: 8px;
-    transition: transform .15s ease;
-    user-select: none;
-  }
-  tr.aberto .chev { transform: rotate(180deg); }
-
-  /* ---------- Linha de detalhes (expansível) ---------- */
-  tr.detalhe { display: none; }
-  tr.detalhe.mostrar { display: table-row; }
-  tr.detalhe td {
-    background: rgba(255,255,255,.025);
-    padding: 14px 14px 16px;
-    cursor: default;
-  }
-  tr.detalhe:hover td { background: rgba(255,255,255,.025); }
-  .detalhe-campos { display: flex; flex-wrap: wrap; gap: 9px 34px; align-items: baseline; }
-  .detalhe-campo { display: flex; gap: 8px; align-items: baseline; font-size: .88rem; }
-  .detalhe-campo.largo { flex-basis: 100%; }
-  .detalhe-campo .rot {
-    color: var(--dourado);
-    font-size: .64rem;
-    font-weight: 800;
-    letter-spacing: .09em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .detalhe-campo .val { color: var(--texto); }
-  .detalhe-campo .val.vazio { color: #6e6556; font-style: italic; }
-  .detalhe-campo .val b { color: var(--creme); }
-  .detalhe-campo .val i { color: var(--texto-2); font-style: normal; font-size: .82rem; margin-left: 4px; }
 
   /* ---------- Aviso de alterações locais ---------- */
   .aviso-local {
-    margin-bottom: 18px;
+    margin: 14px 0;
     background: rgba(224,163,37,.09);
     border: 1px solid rgba(224,163,37,.45);
     border-radius: 10px;
     padding: 14px 16px;
-    font-size: .88rem;
+    font-size: .86rem;
     color: var(--texto-2);
   }
   .aviso-local p { margin-bottom: 10px; }
@@ -274,39 +186,35 @@
     border-radius: 8px;
     padding: 9px 16px;
     cursor: pointer;
-    font-size: .84rem;
+    font-size: .82rem;
     font-weight: 700;
     font-family: inherit;
   }
   .aviso-acoes button:hover { border-color: var(--dourado); }
   .aviso-acoes button.btn-descartar { color: #e8705f; }
 
-  /* ---------- Botão adicionar show ---------- */
-  .cta {
-    text-align: center;
-    margin: 42px 0 12px;
-  }
+  /* ---------- Bot do Telegram ---------- */
+  .cta { text-align: center; margin: 40px 0 12px; }
   .btn-add {
     display: inline-block;
-    padding: 15px 30px;
+    padding: 14px 28px;
     border-radius: 12px;
     text-decoration: none;
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 800;
     color: #0b0906;
     background: linear-gradient(135deg, var(--verde), var(--dourado));
     box-shadow: 0 6px 24px rgba(29,185,84,.25);
-    transition: transform .12s ease, box-shadow .12s ease;
   }
-  .btn-add:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(29,185,84,.35); }
   .modelo {
-    margin-top: 18px;
+    margin: 16px auto 0;
     text-align: left;
+    max-width: 460px;
     background: var(--rock-3);
     border: 1px dashed var(--edge);
     border-radius: 10px;
     padding: 14px 18px;
-    font-size: .88rem;
+    font-size: .86rem;
     color: var(--texto-2);
   }
   .modelo code {
@@ -315,7 +223,7 @@
     margin-top: 8px;
     color: var(--texto);
     font-family: "Courier New", monospace;
-    font-size: .82rem;
+    font-size: .8rem;
   }
   .modelo button {
     margin-top: 10px;
@@ -325,12 +233,12 @@
     border-radius: 6px;
     padding: 8px 16px;
     cursor: pointer;
-    font-size: .84rem;
+    font-size: .82rem;
     font-weight: 600;
   }
   .modelo button:hover { border-color: var(--dourado); }
 
-  /* ---------- Modal de edição ---------- */
+  /* ---------- Modal ---------- */
   .modal-fundo {
     position: fixed;
     inset: 0;
@@ -346,7 +254,7 @@
     border: 1px solid var(--edge);
     border-radius: 16px 16px 0 0;
     width: 100%;
-    max-width: 560px;
+    max-width: 520px;
     max-height: 94vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -361,11 +269,7 @@
     padding-bottom: 12px;
     border-bottom: 1px solid var(--edge);
   }
-  .modal-cab h3 {
-    font-family: Georgia, serif;
-    font-size: 1.15rem;
-    color: var(--creme);
-  }
+  .modal-cab h3 { font-family: Georgia, serif; font-size: 1.1rem; color: var(--creme); }
   .modal-x {
     background: none;
     border: none;
@@ -376,35 +280,31 @@
     line-height: 1;
   }
   .modal-x:hover { color: var(--dourado); }
-  .campo-form { margin-bottom: 14px; }
+  .campo-form { margin-bottom: 13px; }
   .campo-form label {
     display: block;
-    font-size: .68rem;
+    font-size: .66rem;
     font-weight: 800;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--dourado);
     margin-bottom: 5px;
   }
-  .campo-form input[type="text"],
-  .campo-form input[type="date"],
-  .campo-form input[type="time"],
-  .campo-form select,
-  .campo-form textarea {
+  .campo-form input, .campo-form select, .campo-form textarea {
     width: 100%;
     background: var(--rock-3);
     border: 1px solid var(--edge);
     border-radius: 8px;
     padding: 11px 12px;
     color: var(--texto);
-    font-size: 16px;          /* 16px evita zoom automático no iOS */
+    font-size: 16px;
     font-family: inherit;
   }
   .campo-form input:focus, .campo-form select:focus, .campo-form textarea:focus {
     outline: none;
     border-color: var(--dourado);
   }
-  .campo-form textarea { resize: vertical; min-height: 72px; }
+  .campo-form textarea { resize: vertical; min-height: 64px; }
   .campo-check {
     display: flex;
     align-items: center;
@@ -413,17 +313,17 @@
     border: 1px solid var(--edge);
     border-radius: 8px;
     padding: 12px;
-    margin-bottom: 14px;
+    margin-bottom: 13px;
     cursor: pointer;
   }
   .campo-check input { width: 20px; height: 20px; accent-color: var(--verde); }
-  .campo-check span { font-size: .92rem; color: var(--texto); }
+  .campo-check span { font-size: .9rem; color: var(--texto); }
   .dupla { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .modal-acoes {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 18px;
     position: sticky;
     bottom: -28px;
     background: var(--rock-2);
@@ -447,7 +347,7 @@
   .btn-excluir {
     background: transparent;
     color: #e8705f;
-    border-color: rgba(192,57,43,.5) !important;
+    border-color: rgba(224,72,58,.5) !important;
     flex: 0 0 auto !important;
   }
   .btn-cancelar-modal {
@@ -458,16 +358,16 @@
 
   /* ---------- Rodapé ---------- */
   footer {
-    margin-top: 60px;
+    margin-top: 56px;
     border-top: 1px solid var(--edge);
-    padding: 30px 20px 40px;
+    padding: 28px 20px 40px;
     text-align: center;
   }
   footer .serra {
     color: var(--texto-2);
-    font-size: .85rem;
+    font-size: .84rem;
     font-style: italic;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   footer .redes {
     display: flex;
@@ -480,128 +380,28 @@
     padding: 9px 16px;
     border-radius: 8px;
     text-decoration: none;
-    font-size: .9rem;
+    font-size: .88rem;
     font-weight: 600;
     color: var(--texto);
     background: var(--rock-3);
     border: 1px solid var(--edge);
-    transition: transform .12s ease, border-color .12s ease;
   }
-  footer .redes a:hover { transform: translateY(-2px); border-color: var(--dourado); }
-  footer .copy {
-    margin-top: 20px;
-    font-size: .78rem;
-    color: #6e6556;
-  }
+  footer .redes a:hover { border-color: var(--dourado); }
+  footer .copy { margin-top: 18px; font-size: .76rem; color: #6e6556; }
 
-  /* ---------- Mobile: card-resumo compacto + detalhe expansível ---------- */
+  /* ---------- Mobile ---------- */
   @media (max-width: 700px) {
     .wrap { padding: 0 14px; }
-    .tabela-wrap { background: transparent; border: none; box-shadow: none; border-radius: 0; overflow-x: visible; }
-    table.agenda, table.agenda tbody, table.agenda tr, table.agenda td { display: block; width: 100%; }
-    table.agenda thead { display: none; }           /* sem cabeçalho no celular */
-
-    /* card-resumo compacto: data + local + horário + status, tudo à vista */
-    table.agenda tr.linha-show {
-      position: relative;
-      background: var(--rock-2);
-      border: 1px solid var(--edge);
-      border-left: 4px solid var(--verde);
-      border-radius: 12px;
-      margin-bottom: 12px;
-      padding: 13px 15px;
-      box-shadow: 0 4px 18px rgba(0,0,0,.35);
+    ul.lista li.item {
+      grid-template-columns: 84px 1fr 30px;
+      grid-template-areas: "data nome edit" "data selo edit";
+      gap: 2px 12px;
+      padding: 13px 2px;
     }
-    table.agenda tr.linha-show:hover td { background: transparent; }
-    table.agenda tr.status-a_confirmar { border-left-color: var(--dourado); }
-    table.agenda tr.status-cancelado { border-left-color: var(--vermelho); }
-    table.agenda tr.linha-cancelado { opacity: .7; }
-    table.agenda tr.aberto {
-      margin-bottom: 0;
-      border-radius: 12px 12px 0 0;
-      border-bottom: none;
-      box-shadow: none;
-    }
-    table.agenda tr.cabecalho-mes {
-      background: rgba(224,163,37,.10);
-      border: 1px solid rgba(224,163,37,.4);
-      border-left: 4px solid var(--dourado);
-      padding: 8px 15px;
-      margin: 24px 0 12px;
-      border-radius: 8px;
-      font-size: .78rem;
-    }
-    table.agenda td {
-      padding: 2px 0;
-      border: none;
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      white-space: normal;
-    }
-    table.agenda td::before {
-      content: attr(data-rotulo);
-      flex: 0 0 96px;
-      color: var(--dourado);
-      font-size: .64rem;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      padding-top: 2px;
-    }
-    /* resumo: só horário e status mantêm rótulo; data e local ficam limpos */
-    table.agenda td.data::before,
-    table.agenda td.local::before { content: none; }
-    table.agenda td.data {
-      font-size: 1.3rem;
-      padding-right: 46px;          /* espaço pra seta */
-      margin-bottom: 2px;
-    }
-    table.agenda td.data .dow { font-size: .7rem; }
-    table.agenda td.local { font-size: 1.02rem; }
-    table.agenda td.hora { font-size: .88rem; }
-    table.agenda td.status { margin-top: 4px; }
-
-    /* seta no canto do card */
-    table.agenda td.acoes .chev {
-      position: absolute;
-      top: 15px;
-      right: 14px;
-      margin: 0;
-      font-size: 1rem;
-    }
-    table.agenda td.acoes {
-      padding-top: 10px;
-      margin-top: 8px;
-      border-top: 1px dashed rgba(58,47,34,.6) !important;
-    }
-    table.agenda td.acoes::before { content: none; }
-    .btn-edit { width: 100%; padding: 12px; font-size: .95rem; }
-    .btn-edit .txt-edit { display: inline; }
-
-    /* detalhe expansível (continuação visual do card) */
-    table.agenda tr.detalhe.mostrar {
-      background: var(--rock-2);
-      border: 1px solid var(--edge);
-      border-top: 1px dashed rgba(58,47,34,.7);
-      border-radius: 0 0 12px 12px;
-      margin: 0 0 14px;
-      padding: 4px 15px 12px;
-    }
-    table.agenda tr.detalhe td {
-      background: transparent !important;
-      padding: 0;
-    }
-    .detalhe-campos { display: block; }
-    .detalhe-campo {
-      display: flex;
-      gap: 10px;
-      align-items: baseline;
-      padding: 4px 0;
-      font-size: .9rem;
-    }
-    .detalhe-campo .rot { flex: 0 0 96px; font-size: .64rem; }
-    .detalhe-campo .val { flex: 1; }
+    .i-data { grid-area: data; align-self: start; }
+    .i-nome { grid-area: nome; }
+    .i-selo { grid-area: selo; margin-top: 3px; }
+    .btn-edit { grid-area: edit; align-self: start; }
     .modal { border-radius: 16px 16px 0 0; }
     .modal-acoes { bottom: -20px; }
   }
@@ -619,17 +419,19 @@
 </header>
 
 <main class="wrap">
-  <h2 class="secao">Próximos Shows</h2>
-  <div class="linha-topo">
-    <p class="contagem" id="contagem" style="margin-bottom:0"></p>
-    <button type="button" class="btn-novo" onclick="novoShow()">＋ Novo show (neste aparelho)</button>
+  <div class="lista-topo">
+    <div>
+      <h2 class="secao">Agenda</h2>
+      <p class="contagem" id="contagem"></p>
+    </div>
+    <button type="button" class="btn-novo" onclick="novoShow()">＋ Novo show</button>
   </div>
-  <div id="agenda"><p class="vazio">Carregando agenda…</p></div>
+  <div id="agenda"><p class="vazio-lista">Carregando agenda…</p></div>
 
   <div class="cta">
     <a class="btn-add" id="btn-add" href="https://t.me/Patto370Bot" target="_blank" rel="noopener">➕ Adicionar meu show</a>
     <div class="modelo">
-      <b>Modelo pra enviar no bot do Telegram (@Patto370Bot):</b>
+      <b>Modelo pro bot do Telegram (@Patto370Bot):</b>
       <code id="modelo-texto"></code>
       <button type="button" onclick="copiarModelo()">📋 Copiar modelo</button>
     </div>
@@ -667,16 +469,16 @@
         </div>
       </div>
       <div class="campo-form">
-        <label for="f-local">Local</label>
-        <input type="text" id="f-local" placeholder="Nome do lugar">
-      </div>
-      <div class="campo-form">
-        <label for="f-endereco">Endereço</label>
-        <input type="text" id="f-endereco" placeholder="Rua, número">
+        <label for="f-local">Nome do show (local, festa, cidade...)</label>
+        <input type="text" id="f-local" placeholder="Ex.: Alqueire, Reveillon Canastra...">
       </div>
       <div class="campo-form">
         <label for="f-cidade">Cidade</label>
         <input type="text" id="f-cidade" placeholder="Araxá/MG">
+      </div>
+      <div class="campo-form">
+        <label for="f-endereco">Endereço</label>
+        <input type="text" id="f-endereco" placeholder="Rua, número">
       </div>
       <label class="campo-check" for="f-passagem">
         <input type="checkbox" id="f-passagem">
@@ -693,8 +495,8 @@
       <div class="campo-form">
         <label for="f-status">Status</label>
         <select id="f-status">
+          <option value="a_confirmar">Negociando</option>
           <option value="confirmado">Confirmado</option>
-          <option value="a_confirmar">A confirmar</option>
           <option value="cancelado">Cancelado</option>
         </select>
       </div>
@@ -719,35 +521,29 @@
     "🎸 NOVO SHOW — OS PATTO",
     "Data: dd/mm/aaaa",
     "Horário: 21:00",
-    "Local: Nome do lugar",
-    "Endereço: rua, número",
+    "Nome do show: (local, festa, cidade...)",
     "Cidade: Araxá/MG",
+    "Endereço: rua, número",
     "Passagem de som: sim/não (horário:)",
     "Contato: (nome e telefone)",
-    "Status: confirmado / a confirmar / cancelado",
+    "Status: negociando / confirmado / cancelado",
     "Observações: ..."
   ].join("\n");
 
   var CAMPOS = ["data","horario","local","endereco","cidade","passagem_de_som","horario_passagem","contato","status","observacoes"];
-  var NOME_STATUS = {
+  var ROTULO = {
     "confirmado": "Confirmado",
-    "a_confirmar": "A confirmar",
+    "a_confirmar": "Negociando",
     "cancelado": "Cancelado"
   };
 
-  var jsonBase = null;     // shows.json como veio do repo
-  var editandoId = null;   // id do show sendo editado (null = novo show)
+  var jsonBase = null;
+  var editandoId = null;
 
-  // Telegram não pré-preenche mensagens em links de bot (?text= é só para
-  // usuários/canais; bots usam ?start=, limitado a 64 caracteres).
-  // Então o botão abre o bot direto e o modelo completo fica visível aqui
-  // na página, com botão de copiar.
   document.getElementById("btn-add").href = "https://t.me/" + BOT + "?start=novoshow";
   document.getElementById("modelo-texto").textContent = MODELO;
 
-  function copiarModelo() {
-    copiarTexto(MODELO, this);
-  }
+  function copiarModelo() { copiarTexto(MODELO, this); }
 
   function copiarTexto(t, btn) {
     var feito = function () {
@@ -791,20 +587,17 @@
     var d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
     return isNaN(d) ? "" : dias[d.getUTCDay()];
   }
-  function mesBR(iso) {
-    var p = String(iso || "").split("-");
-    if (p.length !== 3) return "Sem data";
-    var meses = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-    var m = +p[1] - 1;
-    return (m >= 0 && m < 12 ? meses[m] : "???") + " " + p[0];
-  }
-  function vazioDet(v, italico) {
-    return (v === null || v === undefined || String(v).trim() === "")
-      ? '<span class="val vazio">' + (italico ? "não informado" : "—") + "</span>"
-      : '<span class="val">' + esc(v) + "</span>";
+  // nome que identifica o show: o que a pessoa colocou em "local",
+  // com fallback pra cidade / endereço
+  function nomeShow(s) {
+    var v = [s.local, s.cidade, s.endereco];
+    for (var i = 0; i < v.length; i++) {
+      if (v[i] && String(v[i]).trim() !== "") return String(v[i]).trim();
+    }
+    return "";
   }
 
-  /* ---------- Alterações locais (persistem neste aparelho) ---------- */
+  /* ---------- Alterações locais ---------- */
   function loadLocal() {
     try {
       var l = JSON.parse(localStorage.getItem(LS_KEY));
@@ -822,7 +615,7 @@
     try { localStorage.setItem(LS_KEY, JSON.stringify(l)); } catch (e) {}
   }
   function idDe(s) {
-    return (String(s.data || "") + "_" + String(s.local || ""))
+    return (String(s.data || "") + "_" + nomeShow(s))
       .toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "sem_id";
   }
   function limparCampos(s) {
@@ -864,7 +657,6 @@
     var shows = mesclar(jsonBase, local);
     var box = document.getElementById("agenda");
 
-    // aviso de alterações locais
     var avisoAntigo = document.getElementById("aviso-local");
     if (avisoAntigo) avisoAntigo.remove();
     if (totalLocal(local) > 0) {
@@ -873,7 +665,6 @@
       aviso.id = "aviso-local";
       aviso.innerHTML =
         "<p>✏️ <b>" + totalLocal(local) + " alteração(ões)</b> salvas só neste aparelho. " +
-        "Elas aparecem pra você, mas o site público ainda mostra a agenda antiga. " +
         "Pra valer pra todo mundo, copie o shows.json abaixo e me mande (ou commite no repo).</p>" +
         '<div class="aviso-acoes">' +
         '<button type="button" id="btn-copiar-json">📋 Copiar shows.json atualizado</button>' +
@@ -891,72 +682,36 @@
       };
     }
 
-    document.getElementById("contagem").innerHTML =
-      shows.length + (shows.length === 1 ? " show" : " shows") + " na estrada · <b>toque no show</b> pra ver os detalhes";
+    document.getElementById("contagem").textContent =
+      shows.length + (shows.length === 1 ? " show" : " shows");
 
     if (!shows.length) {
-      box.innerHTML = '<p class="vazio">Nenhum show na agenda ainda. Seja o primeiro a cadastrar!</p>';
+      box.innerHTML = '<p class="vazio-lista">Nenhum show na agenda ainda.</p>';
       return;
     }
 
-    var html = '<div class="tabela-wrap"><table class="agenda"><thead><tr>' +
-      "<th>Data</th><th>Horário</th><th>Local</th><th>Status</th><th>Ações</th>" +
-      "</tr></thead><tbody>";
-
-    var mesAtual = null;
+    var html = '<ul class="lista">';
     shows.forEach(function (s) {
-      var mes = mesBR(s.data);
-      if (mes !== mesAtual) {
-        html += '<tr class="cabecalho-mes"><td colspan="5">' + esc(mes) + "</td></tr>";
-        mesAtual = mes;
-      }
-      var st = NOME_STATUS[s.status] || s.status || "A confirmar";
-      var pass = s.passagem_de_som
-        ? '<span class="val"><b>Sim</b>' + (s.horario_passagem ? "<i>" + esc(s.horario_passagem) + "</i>" : "") + "</span>"
-        : '<span class="val">Não</span>';
+      var st = s.status === "confirmado" ? "confirmado"
+             : s.status === "cancelado" ? "cancelado"
+             : "negociando";
+      var rot = ROTULO[st] || "Negociando";
+      var nome = nomeShow(s);
       html +=
-        '<tr class="linha-show status-' + esc(s.status || "a_confirmar") +
-          (s.status === "cancelado" ? " linha-cancelado" : "") +
-          '" id="linha-' + esc(s._id) + '" tabindex="0" aria-expanded="false"' +
-          ' onclick="toggleShow(\'' + esc(s._id) + '\')"' +
-          ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleShow(\'' + esc(s._id) + '\')}">' +
-          '<td class="data">' + esc(dataBR(s.data)) +
-            '<span class="dow">' + esc(dowBR(s.data)) + "</span>" +
+        '<li class="item ' + (st === "cancelado" ? "cancelado" : "") + '">' +
+          '<span class="i-data">' + esc(dataBR(s.data)) +
+            '<em>' + esc(dowBR(s.data)) + "</em>" +
+          "</span>" +
+          '<span class="i-nome">' +
+            (nome ? esc(nome) : '<span class="vazio">a definir</span>') +
             (s._editado ? '<span class="marca-edit">editado</span>' : "") +
-          "</td>" +
-          '<td class="hora" data-rotulo="Horário">' + (s.horario ? esc(s.horario) : '<span class="nenhum">—</span>') + "</td>" +
-          '<td class="local" data-rotulo="Local">' + esc(s.local || "") + "</td>" +
-          '<td class="status" data-rotulo="Status"><span class="selo ' + esc(s.status || "a_confirmar") + '">' + esc(st) + "</span></td>" +
-          '<td class="acoes" data-rotulo="Ações">' +
-            '<span class="chev">▾</span>' +
-            '<button type="button" class="btn-edit" onclick="event.stopPropagation();abrirEdicao(\'' + esc(s._id) + '\')">✏️<span class="txt-edit"> Editar show</span></button>' +
-          "</td>" +
-        "</tr>" +
-        '<tr class="detalhe status-' + esc(s.status || "a_confirmar") +
-          (s.status === "cancelado" ? " linha-cancelado" : "") +
-          '" id="det-' + esc(s._id) + '">' +
-          '<td colspan="5"><div class="detalhe-campos">' +
-            '<div class="detalhe-campo"><span class="rot">Endereço</span>' + vazioDet(s.endereco) + "</div>" +
-            '<div class="detalhe-campo"><span class="rot">Cidade</span>' + vazioDet(s.cidade) + "</div>" +
-            '<div class="detalhe-campo"><span class="rot">Passagem de som</span>' + pass + "</div>" +
-            '<div class="detalhe-campo"><span class="rot">Contato</span>' + vazioDet(s.contato) + "</div>" +
-            '<div class="detalhe-campo largo"><span class="rot">Observações</span>' + vazioDet(s.observacoes, true) + "</div>" +
-          "</div></td>" +
-        "</tr>";
+          "</span>" +
+          '<span class="i-selo"><span class="selo ' + st + '">' + rot + "</span></span>" +
+          '<button type="button" class="btn-edit" title="Editar show" onclick="abrirEdicao(\'' + esc(s._id) + '\')">✏️</button>' +
+        "</li>";
     });
-
-    html += "</tbody></table></div>";
+    html += "</ul>";
     box.innerHTML = html;
-  }
-
-  function toggleShow(id) {
-    var linha = document.getElementById("linha-" + id);
-    var det = document.getElementById("det-" + id);
-    if (!linha || !det) return;
-    var abrir = !linha.classList.contains("aberto");
-    linha.classList.toggle("aberto", abrir);
-    det.classList.toggle("mostrar", abrir);
-    linha.setAttribute("aria-expanded", abrir ? "true" : "false");
   }
 
   /* ---------- Modal ---------- */
@@ -988,12 +743,13 @@
     document.getElementById("f-data").value = s.data || "";
     document.getElementById("f-horario").value = s.horario || "";
     document.getElementById("f-local").value = s.local || "";
-    document.getElementById("f-endereco").value = s.endereco || "";
     document.getElementById("f-cidade").value = s.cidade || "";
+    document.getElementById("f-endereco").value = s.endereco || "";
     document.getElementById("f-passagem").checked = !!s.passagem_de_som;
     document.getElementById("f-horario-passagem").value = s.horario_passagem || "";
     document.getElementById("f-contato").value = s.contato || "";
-    document.getElementById("f-status").value = NOME_STATUS[s.status] ? s.status : "a_confirmar";
+    document.getElementById("f-status").value =
+      (s.status === "confirmado" || s.status === "cancelado") ? s.status : "a_confirmar";
     document.getElementById("f-observacoes").value = s.observacoes || "";
     togglePassagem();
   }
