@@ -1,15 +1,15 @@
 [
   {
-    "data": "2026-11-07",
-    "horario": "21:30",
-    "local": "Espaço Canastra",
-    "endereco": "Rua das Cachoeiras, 250",
-    "cidade": "Araxá/MG",
+    "data": "2026-10-29",
+    "horario": "20:00",
+    "local": "Alqueire",
+    "endereco": "",
+    "cidade": "",
     "passagem_de_som": true,
-    "horario_passagem": "19:30",
-    "contato": "(34) 99999-0000 — produção do espaço",
+    "horario_passagem": "18:00",
+    "contato": "",
     "status": "confirmado",
-    "observacoes": "Show de exemplo. Chegar 1h antes para a passagem de som."
+    "observacoes": "Aniversário."
   },
   {
     "data": "2026-11-15",
