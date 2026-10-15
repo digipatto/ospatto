@@ -13,14 +13,14 @@
      Essence: reggae-rock from the Serra da Canastra — warm sun gold, reggae green/gold/red mark. */
   :root{
     --bg:#f7f1e2; --fg:#1f1c12; --muted:#8a8168; --line:#e7ddc6; --tint:#efe6d1;
-    --gold:#cf8a07; --gold-ink:#2a1e02;
+    --gold:#cf8a07; --gold-ink:#2a1e02; --gold-bg:#f9ecd0; --gold-line:#eccd8d;
     --green:#1f9d55; --green-bg:#cfe9d4; --green-line:#9ed3a8; --green-row:#e9f4e9;
     --red:#d6431f; --red-bg:#f9d9cb; --red-line:#eeae97; --red-row:#fbeee7;
     --reg-g:#1f9d55; --reg-y:#f0b018; --reg-r:#d6431f;
   }
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --bg:#13150d; --fg:#f1ecdc; --muted:#938e78; --line:#2a2b1f; --tint:#1a1c12;
-    --gold:#edc14e; --gold-ink:#241a04;
+    --gold:#edc14e; --gold-ink:#241a04; --gold-bg:#332710; --gold-line:#4e3b16;
     --green:#58c884; --green-bg:#1c3324; --green-line:#31513a; --green-row:#17241a;
     --red:#ef6f4a; --red-bg:#38201a; --red-line:#4f3128; --red-row:#241a16;
     --reg-g:#58c884; --reg-y:#edc14e; --reg-r:#ef6f4a;
@@ -28,7 +28,7 @@
   }}
   :root[data-theme="dark"]{
     --bg:#13150d; --fg:#f1ecdc; --muted:#938e78; --line:#2a2b1f; --tint:#1a1c12;
-    --gold:#edc14e; --gold-ink:#241a04;
+    --gold:#edc14e; --gold-ink:#241a04; --gold-bg:#332710; --gold-line:#4e3b16;
     --green:#58c884; --green-bg:#1c3324; --green-line:#31513a; --green-row:#17241a;
     --red:#ef6f4a; --red-bg:#38201a; --red-line:#4f3128; --red-row:#241a16;
     --reg-g:#58c884; --reg-y:#edc14e; --reg-r:#ef6f4a;
@@ -57,9 +57,16 @@
   .eyebrow{font-size:11.5px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;
     color:var(--muted);margin:13px 0 0}
 
-  .toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px}
-  .count{font-size:12.5px;color:var(--muted);font-weight:600}
-  .count b{color:var(--fg);font-weight:800}
+  .toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .stats{display:flex;flex-wrap:wrap;gap:7px}
+  .stat{display:inline-flex;align-items:center;gap:7px;
+    font-size:11.5px;font-weight:800;letter-spacing:.02em;
+    padding:5px 12px 5px 10px;border-radius:999px;border:1px solid;white-space:nowrap}
+  .stat .dot{width:7px;height:7px;border-radius:50%;flex:none}
+  .stat b{font-size:12.5px}
+  .stat.total{color:var(--gold);background:var(--gold-bg);border-color:var(--gold-line)} .stat.total .dot{background:var(--gold)}
+  .stat.ok{color:var(--green);background:var(--green-bg);border-color:var(--green-line)} .stat.ok .dot{background:var(--green)}
+  .stat.neg{color:var(--red);background:var(--red-bg);border-color:var(--red-line)} .stat.neg .dot{background:var(--red)}
   .novo{display:inline-flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer;
     font-family:inherit;font-size:13px;font-weight:800;color:var(--gold-ink);
     background:var(--gold);border:none;border-radius:999px;padding:8px 14px;
@@ -119,7 +126,7 @@
   </header>
 
   <div class="toolbar">
-    <div class="count" id="count">&nbsp;</div>
+    <div class="stats" id="stats">&nbsp;</div>
     <a class="novo" id="novo" href="https://t.me/Patto370Bot?start=novoshow" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
       Novo show
@@ -137,7 +144,7 @@
   var BOT="Patto370Bot";
   var DIAS=["dom","seg","ter","qua","qui","sex","sáb"];
   var content=document.getElementById("content");
-  var countEl=document.getElementById("count");
+  var statsEl=document.getElementById("stats");
 
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
   function parse(str){ var p=String(str||"").split("-"); if(p.length!==3) return null; var d=new Date(+p[0],+p[1]-1,+p[2]); return isNaN(d)?null:d; }
@@ -154,7 +161,14 @@
     var shows=(data||[]).filter(function(s){return parse(s.data);})
       .sort(function(a,b){ return String(a.data).localeCompare(String(b.data)); });
 
-    countEl.innerHTML=shows.length?('<b>'+shows.length+'</b> '+(shows.length===1?"show":"shows")):'&nbsp;';
+    // resumo: total (dourado) · confirmados (verde) · negociando (vermelho)
+    var total=shows.length, ok=0;
+    shows.forEach(function(s){ if(s.status==="confirmado") ok++; });
+    var neg=total-ok;
+    statsEl.innerHTML=
+      '<span class="stat total"><span class="dot"></span><b>'+total+'</b> '+(total===1?"show":"shows")+'</span>'+
+      '<span class="stat ok"><span class="dot"></span><b>'+ok+'</b> '+(ok===1?"confirmado":"confirmados")+'</span>'+
+      '<span class="stat neg"><span class="dot"></span><b>'+neg+'</b> negociando</span>';
     if(!shows.length){ content.innerHTML='<p class="empty">Nenhum show marcado ainda.</p>'; return; }
 
     var html='<ul class="list">';
@@ -177,7 +191,7 @@
   fetch("shows.json",{cache:"no-store"})
     .then(function(r){ if(!r.ok) throw 0; return r.json(); })
     .then(function(d){ render(Array.isArray(d)?d:[]); })
-    .catch(function(){ countEl.innerHTML='&nbsp;'; content.innerHTML='<p class="err">Não foi possível carregar a agenda. Recarregue a página.</p>'; });
+    .catch(function(){ statsEl.innerHTML='&nbsp;'; content.innerHTML='<p class="err">Não foi possível carregar a agenda. Recarregue a página.</p>'; });
 })();
 </script>
 
