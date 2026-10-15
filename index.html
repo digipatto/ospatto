@@ -87,6 +87,7 @@
     margin-bottom: 14px;
     letter-spacing: .04em;
   }
+  .contagem b { color: var(--dourado); font-weight: 700; }
   .linha-topo {
     display: flex;
     flex-wrap: wrap;
@@ -108,7 +109,7 @@
   }
   .btn-novo:hover { border-color: var(--dourado); }
 
-  /* ---------- Tabela de shows (desktop) ---------- */
+  /* ---------- Tabela-resumo (desktop) ---------- */
   .tabela-wrap {
     background: var(--rock-2);
     border: 1px solid var(--edge);
@@ -134,10 +135,12 @@
     white-space: nowrap;
   }
   table.agenda td {
-    padding: 14px;
+    padding: 12px 14px;
     border-bottom: 1px solid rgba(58,47,34,.6);
-    vertical-align: top;
+    vertical-align: middle;
   }
+  table.agenda tr.linha-show { cursor: pointer; }
+  table.agenda tr.linha-show:hover td { background: rgba(224,163,37,.05); }
   table.agenda tr:last-child td { border-bottom: none; }
   table.agenda tr.cabecalho-mes td {
     background: rgba(224,163,37,.07);
@@ -157,12 +160,10 @@
     color: var(--creme);
     white-space: nowrap;
   }
-  td.data .dow { display: block; font-size: .7rem; color: var(--texto-2); font-weight: 400; letter-spacing: .06em; text-transform: uppercase; margin-top: 2px; }
-  td.local { font-weight: 700; color: var(--texto); min-width: 120px; }
-  td .sub { display: block; color: var(--texto-2); font-size: .82rem; margin-top: 2px; font-weight: 400; }
+  td.data .dow { color: var(--texto-2); font-size: .72rem; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; margin-left: 6px; }
+  td.local { font-weight: 700; color: var(--texto); }
+  td.hora { color: var(--texto-2); white-space: nowrap; }
   td .nenhum { color: #6e6556; font-style: italic; }
-  td.pass b { color: var(--texto); font-weight: 600; }
-  td.obs { color: var(--texto-2); font-style: italic; font-size: .86rem; min-width: 150px; }
   .marca-edit {
     display: inline-block;
     margin-left: 6px;
@@ -204,7 +205,7 @@
     color: #f0b3a8;
     font-size: .92rem;
   }
-  td.acoes { white-space: nowrap; }
+  td.acoes { white-space: nowrap; text-align: right; }
   .btn-edit {
     background: var(--rock-3);
     color: var(--dourado);
@@ -218,6 +219,40 @@
   }
   .btn-edit:hover { border-color: var(--dourado); }
   .btn-edit .txt-edit { display: none; }
+  .chev {
+    display: inline-block;
+    color: var(--dourado);
+    font-size: .85rem;
+    margin-right: 8px;
+    transition: transform .15s ease;
+    user-select: none;
+  }
+  tr.aberto .chev { transform: rotate(180deg); }
+
+  /* ---------- Linha de detalhes (expansível) ---------- */
+  tr.detalhe { display: none; }
+  tr.detalhe.mostrar { display: table-row; }
+  tr.detalhe td {
+    background: rgba(255,255,255,.025);
+    padding: 14px 14px 16px;
+    cursor: default;
+  }
+  tr.detalhe:hover td { background: rgba(255,255,255,.025); }
+  .detalhe-campos { display: flex; flex-wrap: wrap; gap: 9px 34px; align-items: baseline; }
+  .detalhe-campo { display: flex; gap: 8px; align-items: baseline; font-size: .88rem; }
+  .detalhe-campo.largo { flex-basis: 100%; }
+  .detalhe-campo .rot {
+    color: var(--dourado);
+    font-size: .64rem;
+    font-weight: 800;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .detalhe-campo .val { color: var(--texto); }
+  .detalhe-campo .val.vazio { color: #6e6556; font-style: italic; }
+  .detalhe-campo .val b { color: var(--creme); }
+  .detalhe-campo .val i { color: var(--texto-2); font-style: normal; font-size: .82rem; margin-left: 4px; }
 
   /* ---------- Aviso de alterações locais ---------- */
   .aviso-local {
@@ -459,34 +494,45 @@
     color: #6e6556;
   }
 
-  /* ---------- Mobile: a tabela vira "ficha" por show ---------- */
+  /* ---------- Mobile: card-resumo compacto + detalhe expansível ---------- */
   @media (max-width: 700px) {
     .wrap { padding: 0 14px; }
     .tabela-wrap { background: transparent; border: none; box-shadow: none; border-radius: 0; overflow-x: visible; }
     table.agenda, table.agenda tbody, table.agenda tr, table.agenda td { display: block; width: 100%; }
     table.agenda thead { display: none; }           /* sem cabeçalho no celular */
-    table.agenda tr {
+
+    /* card-resumo compacto: data + local + horário + status, tudo à vista */
+    table.agenda tr.linha-show {
+      position: relative;
       background: var(--rock-2);
       border: 1px solid var(--edge);
       border-left: 4px solid var(--verde);
       border-radius: 12px;
-      margin-bottom: 16px;
-      padding: 14px 16px;
+      margin-bottom: 12px;
+      padding: 13px 15px;
       box-shadow: 0 4px 18px rgba(0,0,0,.35);
     }
+    table.agenda tr.linha-show:hover td { background: transparent; }
     table.agenda tr.status-a_confirmar { border-left-color: var(--dourado); }
     table.agenda tr.status-cancelado { border-left-color: var(--vermelho); }
     table.agenda tr.linha-cancelado { opacity: .7; }
+    table.agenda tr.aberto {
+      margin-bottom: 0;
+      border-radius: 12px 12px 0 0;
+      border-bottom: none;
+      box-shadow: none;
+    }
     table.agenda tr.cabecalho-mes {
       background: rgba(224,163,37,.10);
       border: 1px solid rgba(224,163,37,.4);
       border-left: 4px solid var(--dourado);
-      padding: 9px 16px;
-      margin: 26px 0 16px;
+      padding: 8px 15px;
+      margin: 24px 0 12px;
       border-radius: 8px;
+      font-size: .78rem;
     }
     table.agenda td {
-      padding: 3px 0;
+      padding: 2px 0;
       border: none;
       display: flex;
       align-items: baseline;
@@ -495,37 +541,67 @@
     }
     table.agenda td::before {
       content: attr(data-rotulo);
-      flex: 0 0 108px;
+      flex: 0 0 96px;
       color: var(--dourado);
-      font-size: .66rem;
+      font-size: .64rem;
       font-weight: 800;
       letter-spacing: .08em;
       text-transform: uppercase;
       padding-top: 2px;
     }
-    table.agenda td.data::before { content: none; }  /* data já é o título */
+    /* resumo: só horário e status mantêm rótulo; data e local ficam limpos */
+    table.agenda td.data::before,
+    table.agenda td.local::before { content: none; }
     table.agenda td.data {
-      font-size: 1.35rem;
-      margin-bottom: 6px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(58,47,34,.6);
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
+      font-size: 1.3rem;
+      padding-right: 46px;          /* espaço pra seta */
+      margin-bottom: 2px;
     }
-    table.agenda td.data .dow { display: inline; font-size: .72rem; margin-left: 8px; }
-    table.agenda td.local { font-size: 1.05rem; }
-    table.agenda td .sub { display: inline; margin: 0 0 0 6px; }
-    table.agenda td.obs { font-size: .88rem; }
-    table.agenda td.obs::before { padding-top: 0; }
+    table.agenda td.data .dow { font-size: .7rem; }
+    table.agenda td.local { font-size: 1.02rem; }
+    table.agenda td.hora { font-size: .88rem; }
+    table.agenda td.status { margin-top: 4px; }
+
+    /* seta no canto do card */
+    table.agenda td.acoes .chev {
+      position: absolute;
+      top: 15px;
+      right: 14px;
+      margin: 0;
+      font-size: 1rem;
+    }
     table.agenda td.acoes {
-      padding-top: 12px;
-      margin-top: 6px;
+      padding-top: 10px;
+      margin-top: 8px;
       border-top: 1px dashed rgba(58,47,34,.6) !important;
     }
     table.agenda td.acoes::before { content: none; }
     .btn-edit { width: 100%; padding: 12px; font-size: .95rem; }
     .btn-edit .txt-edit { display: inline; }
+
+    /* detalhe expansível (continuação visual do card) */
+    table.agenda tr.detalhe.mostrar {
+      background: var(--rock-2);
+      border: 1px solid var(--edge);
+      border-top: 1px dashed rgba(58,47,34,.7);
+      border-radius: 0 0 12px 12px;
+      margin: 0 0 14px;
+      padding: 4px 15px 12px;
+    }
+    table.agenda tr.detalhe td {
+      background: transparent !important;
+      padding: 0;
+    }
+    .detalhe-campos { display: block; }
+    .detalhe-campo {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      padding: 4px 0;
+      font-size: .9rem;
+    }
+    .detalhe-campo .rot { flex: 0 0 96px; font-size: .64rem; }
+    .detalhe-campo .val { flex: 1; }
     .modal { border-radius: 16px 16px 0 0; }
     .modal-acoes { bottom: -20px; }
   }
@@ -563,7 +639,7 @@
 <footer>
   <p class="serra">Da Serra da Canastra pro mundo — música independente, raiz e de família.</p>
   <nav class="redes">
-    <a href="https://instagram.com/ospatto" target="_blank" rel="noopener">Instagram @ospatto</a>
+    <a href="https://instagram.com/ospatto" target="_blank" rel="noopener">Instagram</a>
     <a href="https://youtube.com/ospatto" target="_blank" rel="noopener">YouTube</a>
     <a href="https://facebook.com/ospattomusic" target="_blank" rel="noopener">Facebook</a>
     <a href="https://tiktok.com/@ospatto" target="_blank" rel="noopener">TikTok</a>
@@ -701,7 +777,7 @@
   function esc(s) {
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
   }
   function dataBR(iso) {
     if (!iso) return "";
@@ -722,10 +798,10 @@
     var m = +p[1] - 1;
     return (m >= 0 && m < 12 ? meses[m] : "???") + " " + p[0];
   }
-  function ouVazio(v, italico) {
+  function vazioDet(v, italico) {
     return (v === null || v === undefined || String(v).trim() === "")
-      ? '<span class="nenhum">' + (italico ? "não informado" : "—") + '</span>'
-      : esc(v);
+      ? '<span class="val vazio">' + (italico ? "não informado" : "—") + "</span>"
+      : '<span class="val">' + esc(v) + "</span>";
   }
 
   /* ---------- Alterações locais (persistem neste aparelho) ---------- */
@@ -815,8 +891,8 @@
       };
     }
 
-    document.getElementById("contagem").textContent =
-      shows.length + (shows.length === 1 ? " show na estrada" : " shows na estrada") + " · ordenados por data";
+    document.getElementById("contagem").innerHTML =
+      shows.length + (shows.length === 1 ? " show" : " shows") + " na estrada · <b>toque no show</b> pra ver os detalhes";
 
     if (!shows.length) {
       box.innerHTML = '<p class="vazio">Nenhum show na agenda ainda. Seja o primeiro a cadastrar!</p>';
@@ -824,44 +900,63 @@
     }
 
     var html = '<div class="tabela-wrap"><table class="agenda"><thead><tr>' +
-      "<th>Data</th><th>Horário</th><th>Local</th><th>Endereço</th><th>Cidade</th>" +
-      "<th>Passagem</th><th>Contato</th><th>Status</th><th>Observações</th><th>Ações</th>" +
+      "<th>Data</th><th>Horário</th><th>Local</th><th>Status</th><th>Ações</th>" +
       "</tr></thead><tbody>";
 
     var mesAtual = null;
     shows.forEach(function (s) {
       var mes = mesBR(s.data);
       if (mes !== mesAtual) {
-        html += '<tr class="cabecalho-mes"><td colspan="10">' + esc(mes) + "</td></tr>";
+        html += '<tr class="cabecalho-mes"><td colspan="5">' + esc(mes) + "</td></tr>";
         mesAtual = mes;
       }
       var st = NOME_STATUS[s.status] || s.status || "A confirmar";
       var pass = s.passagem_de_som
-        ? "<b>Sim</b>" + (s.horario_passagem ? '<span class="sub">' + esc(s.horario_passagem) + "</span>" : "")
-        : "Não";
+        ? '<span class="val"><b>Sim</b>' + (s.horario_passagem ? "<i>" + esc(s.horario_passagem) + "</i>" : "") + "</span>"
+        : '<span class="val">Não</span>';
       html +=
         '<tr class="linha-show status-' + esc(s.status || "a_confirmar") +
-          (s.status === "cancelado" ? " linha-cancelado" : "") + '">' +
-          '<td class="data" data-rotulo="Data">' + esc(dataBR(s.data)) +
+          (s.status === "cancelado" ? " linha-cancelado" : "") +
+          '" id="linha-' + esc(s._id) + '" tabindex="0" aria-expanded="false"' +
+          ' onclick="toggleShow(\'' + esc(s._id) + '\')"' +
+          ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleShow(\'' + esc(s._id) + '\')}">' +
+          '<td class="data">' + esc(dataBR(s.data)) +
             '<span class="dow">' + esc(dowBR(s.data)) + "</span>" +
             (s._editado ? '<span class="marca-edit">editado</span>' : "") +
           "</td>" +
-          '<td class="hora" data-rotulo="Horário">' + ouVazio(s.horario) + "</td>" +
+          '<td class="hora" data-rotulo="Horário">' + (s.horario ? esc(s.horario) : '<span class="nenhum">—</span>') + "</td>" +
           '<td class="local" data-rotulo="Local">' + esc(s.local || "") + "</td>" +
-          '<td class="endereco" data-rotulo="Endereço">' + ouVazio(s.endereco) + "</td>" +
-          '<td class="cidade" data-rotulo="Cidade">' + ouVazio(s.cidade) + "</td>" +
-          '<td class="pass" data-rotulo="Passagem">' + pass + "</td>" +
-          '<td class="contato" data-rotulo="Contato">' + ouVazio(s.contato) + "</td>" +
           '<td class="status" data-rotulo="Status"><span class="selo ' + esc(s.status || "a_confirmar") + '">' + esc(st) + "</span></td>" +
-          '<td class="obs" data-rotulo="Obs.">' + ouVazio(s.observacoes, true) + "</td>" +
           '<td class="acoes" data-rotulo="Ações">' +
-            '<button type="button" class="btn-edit" onclick="abrirEdicao(\'' + esc(s._id) + '\')">✏️<span class="txt-edit"> Editar show</span></button>' +
+            '<span class="chev">▾</span>' +
+            '<button type="button" class="btn-edit" onclick="event.stopPropagation();abrirEdicao(\'' + esc(s._id) + '\')">✏️<span class="txt-edit"> Editar show</span></button>' +
           "</td>" +
+        "</tr>" +
+        '<tr class="detalhe status-' + esc(s.status || "a_confirmar") +
+          (s.status === "cancelado" ? " linha-cancelado" : "") +
+          '" id="det-' + esc(s._id) + '">' +
+          '<td colspan="5"><div class="detalhe-campos">' +
+            '<div class="detalhe-campo"><span class="rot">Endereço</span>' + vazioDet(s.endereco) + "</div>" +
+            '<div class="detalhe-campo"><span class="rot">Cidade</span>' + vazioDet(s.cidade) + "</div>" +
+            '<div class="detalhe-campo"><span class="rot">Passagem de som</span>' + pass + "</div>" +
+            '<div class="detalhe-campo"><span class="rot">Contato</span>' + vazioDet(s.contato) + "</div>" +
+            '<div class="detalhe-campo largo"><span class="rot">Observações</span>' + vazioDet(s.observacoes, true) + "</div>" +
+          "</div></td>" +
         "</tr>";
     });
 
     html += "</tbody></table></div>";
     box.innerHTML = html;
+  }
+
+  function toggleShow(id) {
+    var linha = document.getElementById("linha-" + id);
+    var det = document.getElementById("det-" + id);
+    if (!linha || !det) return;
+    var abrir = !linha.classList.contains("aberto");
+    linha.classList.toggle("aberto", abrir);
+    det.classList.toggle("mostrar", abrir);
+    linha.setAttribute("aria-expanded", abrir ? "true" : "false");
   }
 
   /* ---------- Modal ---------- */
