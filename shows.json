@@ -1,5 +1,17 @@
 [
   {
+    "data": "2026-10-24",
+    "horario": "18:00",
+    "local": "Chegada Lucca Alaska",
+    "endereco": "",
+    "cidade": "",
+    "passagem_de_som": false,
+    "horario_passagem": "",
+    "contato": "",
+    "status": "a_confirmar",
+    "observacoes": "Em negociação."
+  },
+  {
     "data": "2026-10-29",
     "horario": "20:00",
     "local": "Alqueire",
