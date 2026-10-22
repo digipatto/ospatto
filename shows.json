@@ -12,6 +12,18 @@
     "observacoes": "Aniversário."
   },
   {
+    "data": "2026-11-01",
+    "horario": "",
+    "local": "Sacramento",
+    "endereco": "",
+    "cidade": "",
+    "passagem_de_som": false,
+    "horario_passagem": "",
+    "contato": "",
+    "status": "confirmado",
+    "observacoes": ""
+  },
+  {
     "data": "2026-11-15",
     "horario": "",
     "local": "Mergulho",
