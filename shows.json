@@ -1,53 +1,5 @@
 [
   {
-    "data": "2026-10-29",
-    "horario": "20:00",
-    "local": "Alqueire",
-    "endereco": "",
-    "cidade": "",
-    "passagem_de_som": true,
-    "horario_passagem": "18:00",
-    "contato": "",
-    "status": "confirmado",
-    "observacoes": "Aniversário."
-  },
-  {
-    "data": "2026-11-01",
-    "horario": "",
-    "local": "Sacramento",
-    "endereco": "",
-    "cidade": "",
-    "passagem_de_som": false,
-    "horario_passagem": "",
-    "contato": "",
-    "status": "confirmado",
-    "observacoes": ""
-  },
-  {
-    "data": "2026-11-15",
-    "horario": "",
-    "local": "Mergulho",
-    "endereco": "",
-    "cidade": "",
-    "passagem_de_som": false,
-    "horario_passagem": "",
-    "contato": "",
-    "status": "a_confirmar",
-    "observacoes": "Anotado como '15/11 Mergulho' — data e local ainda a confirmar."
-  },
-  {
-    "data": "2026-11-20",
-    "horario": "",
-    "local": "Casa di Julieta — Uberaba",
-    "endereco": "",
-    "cidade": "Uberaba/MG",
-    "passagem_de_som": false,
-    "horario_passagem": "",
-    "contato": "",
-    "status": "a_confirmar",
-    "observacoes": "Em negociação."
-  },
-  {
     "data": "2026-11-27",
     "horario": "",
     "local": "Ribeirão Vermei",
