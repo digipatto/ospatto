@@ -1,5 +1,17 @@
 [
   {
+    "data": "2026-11-19",
+    "horario": "",
+    "local": "Bali",
+    "endereco": "",
+    "cidade": "",
+    "passagem_de_som": false,
+    "horario_passagem": "",
+    "contato": "",
+    "status": "confirmado",
+    "observacoes": "Adicionado pelo usuário — 19/11 Bali"
+  },
+  {
     "data": "2026-11-27",
     "horario": "",
     "local": "Ribeirão Vermelho",
