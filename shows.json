@@ -48,6 +48,18 @@
     "observacoes": "Confirmação Show — OS PATTO"
   },
   {
+    "data": "2026-12-19",
+    "horario": "",
+    "local": "Alqueire",
+    "endereco": "",
+    "cidade": "",
+    "passagem_de_som": false,
+    "horario_passagem": "",
+    "contato": "",
+    "status": "confirmado",
+    "observacoes": "Aniversário do Horse"
+  },
+  {
     "data": "2026-12-31",
     "horario": "",
     "local": "Réveillon Canastra",
