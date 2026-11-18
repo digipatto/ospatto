@@ -82,10 +82,6 @@
   .row.neg{background:var(--red-row)}
   .row.past{opacity:.45}
 
-  .edit{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;
-    color:var(--muted);text-decoration:none;border:1.5px solid var(--line);transition:color .12s,border-color .12s}
-  .edit:hover{color:var(--gold);border-color:var(--gold)}
-  .edit svg{width:14px;height:14px}
 
   .row.past{opacity:.45}
 
@@ -123,7 +119,6 @@
 <script>
 (function(){
   "use strict";
-  var BOT="Patto370Bot";
   var DIAS=["dom","seg","ter","qua","qui","sex","sáb"];
   var content=document.getElementById("content");
   var statsEl=document.getElementById("stats");
@@ -132,12 +127,6 @@
   function parse(str){ var p=String(str||"").split("-"); if(p.length!==3) return null; var d=new Date(+p[0],+p[1]-1,+p[2]); return isNaN(d)?null:d; }
   function nome(s){ var v=[s.local,s.cidade,s.endereco]; for(var i=0;i<v.length;i++){ if(v[i]&&String(v[i]).trim()) return String(v[i]).trim(); } return "A definir"; }
   function dataBR(d){ return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+"/"+d.getFullYear(); }
-  function editLink(s){
-    var slug=(String(s.data||"")+"_"+nome(s)).toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"");
-    var p="editar_"+slug; if(p.length>64) p=p.slice(0,64);
-    return "https://t.me/"+BOT+"?start="+p;
-  }
-
   function render(data){
     var tod=new Date(); tod.setHours(0,0,0,0);
     var shows=(data||[]).filter(function(s){return parse(s.data);})
@@ -162,8 +151,6 @@
           '<div class="hr">'+DIAS[d.getDay()]+' · '+hora+'</div></div>'+
         '<div class="name">'+esc(nome(s))+'</div>'+
         '<div class="status '+(ok?"ok":"neg")+'"><span class="dot"></span>'+(ok?"Confirmado":"Negociando")+'</div>'+
-        '<a class="edit" href="'+esc(editLink(s))+'" target="_blank" rel="noopener" aria-label="Editar pelo Telegram">'+
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></a>'+
       '</li>';
     });
     html+='</ul>';
